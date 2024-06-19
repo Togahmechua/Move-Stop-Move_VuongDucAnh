@@ -7,6 +7,13 @@ public class BotCtrl : Character
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private AttackRange attackRange;
+
+    private void Update()
+    {
+        Shoot();
+        Move();
+    }
 
     protected override void Move()
     {
@@ -19,8 +26,11 @@ public class BotCtrl : Character
         Destroy(gameObject);
     }
 
-    private void SelfRemove()
+    protected override void Shoot()
     {
-
+        if (attackRange.isInRange && canShoot)
+        {
+            base.Shoot();
+        }
     }
 }

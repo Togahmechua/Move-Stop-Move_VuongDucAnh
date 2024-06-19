@@ -8,17 +8,25 @@ public class Player : Character
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private AttackRange attackRange;
-    [SerializeField] private Weapon weaponPrefab;
     [SerializeField] private FixedJoystick joyStick;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float shootDelay;
-    [SerializeField] private Transform shootPos;
 
-    private bool canShoot = true;
 
-    private void FixedUpdate()
+
+    private void Update()
     {
-        this.Move();
+        if (Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f)
+        {
+            this.Move();
+            ChangeAnim(Constants.ANIM_RUNNING);
+        }
+        else
+        {
+            if (canShoot == false) return;
+            ChangeAnim(Constants.ANIM_IDLE);
+            rb.velocity = Vector3.zero;
+        }
+        
         Shoot();
     }
 
@@ -26,29 +34,22 @@ public class Player : Character
     {
         base.Move();
         rb.velocity = new Vector3(joyStick.Horizontal * moveSpeed, rb.velocity.y, joyStick.Vertical * moveSpeed);
-
-        if (joyStick.Horizontal != 0 || joyStick.Vertical != 0)
+        if (Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f)
         {
-            TF.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, 0, rb.velocity.z));   
+            TF.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, 0, rb.velocity.z));
         }
     }
 
-    private void Shoot()
+    protected override void Shoot()
     {
         if (attackRange.isInRange && joyStick.Horizontal == 0 && joyStick.Vertical == 0 && canShoot)
         {
-            StartCoroutine(ShootBulletDelay());
+            base.Shoot();
         }
-    }
-
-    private IEnumerator ShootBulletDelay()
-    {
-        canShoot = false;
-        // Weapon newWeapon = Instantiate(weaponPrefab, shootPos.position, shootPos.rotation);
-        Weapon newWeapon = SimplePool.Spawn<Weapon>(PoolType.Weapon, TF.position, TF.rotation);
-        newWeapon.Owner = this;
-        yield return new WaitForSeconds(shootDelay);
-        canShoot = true;
+        else
+        {
+            canShoot = true;
+        }
     }
 
     public override void Die()
