@@ -7,18 +7,21 @@ public class Weapon : GameUnit
     [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] protected Vector3 direction;
     [SerializeField] private float timeToDestroy;
+    public bool isDestroy;
     public Character Owner { get; set; }
 
     void Update()
     {
-        StartCoroutine(DestroyByDistance());
+        StartCoroutine(DestroyByTime());
         Move();
     }
 
-    private IEnumerator DestroyByDistance()
+    private IEnumerator DestroyByTime()
     {
         yield return new WaitForSeconds(timeToDestroy);
         SimplePool.Despawn(this);
+        isDestroy = true;
+        Owner.canShoot = true;
     }
 
     private void Move()
@@ -32,6 +35,7 @@ public class Weapon : GameUnit
         if (character != null && character != Owner)
         {
             SimplePool.Despawn(this);
+            Owner.canShoot = true;
             character.Die();
         }
     }

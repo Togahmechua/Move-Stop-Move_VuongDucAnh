@@ -149,7 +149,8 @@ MonoBehaviour:
   poolType: 1
   moveSpeed: 3
   direction: {x: 0, y: 0, z: 1}
-  timeToDestroy: 5
+  timeToDestroy: 2
+  isDestroy: 0
 --- !u!65 &5027225211932862623
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -12,43 +12,45 @@ public class Player : Character
     [SerializeField] private float moveSpeed;
 
 
-
     private void Update()
     {
-        if (Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f)
+        // Kiểm tra xem nhân vật có di chuyển không
+        bool isMoving = Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f;
+
+        if (isMoving)
         {
             this.Move();
             ChangeAnim(Constants.ANIM_RUNNING);
+            canShoot = true;
+            isChecked = false;
         }
         else
         {
-            if (canShoot == false) return;
-            ChangeAnim(Constants.ANIM_IDLE);
-            rb.velocity = Vector3.zero;
+            if (canShoot && attackRange.characterList.Count > 0 && !isChecked)
+            {
+                TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
+                Shoot();
+                isChecked = true;
+            }
+            else
+            {
+                if (!isAttacking) // Kiểm tra nếu không trong trạng thái tấn công
+                {
+                    ChangeAnim(Constants.ANIM_IDLE);
+                }
+                rb.velocity = Vector3.zero;
+            }
         }
-        
-        Shoot();
     }
 
     protected override void Move()
     {
         base.Move();
-        rb.velocity = new Vector3(joyStick.Horizontal * moveSpeed, rb.velocity.y, joyStick.Vertical * moveSpeed);
-        if (Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f)
+        Vector3 movement = new Vector3(joyStick.Horizontal, 0, joyStick.Vertical) * moveSpeed;
+        rb.velocity = movement;
+        if (movement != Vector3.zero)
         {
-            TF.rotation = Quaternion.LookRotation(new Vector3(rb.velocity.x, 0, rb.velocity.z));
-        }
-    }
-
-    protected override void Shoot()
-    {
-        if (attackRange.isInRange && joyStick.Horizontal == 0 && joyStick.Vertical == 0 && canShoot)
-        {
-            base.Shoot();
-        }
-        else
-        {
-            canShoot = true;
+            TF.rotation = Quaternion.LookRotation(movement);
         }
     }
 

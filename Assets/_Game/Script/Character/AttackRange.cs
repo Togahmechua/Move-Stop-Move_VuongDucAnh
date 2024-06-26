@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackRange : MonoBehaviour
 {
     [SerializeField] private Character parent;
-    [SerializeField] private List<Character> characterList;
+    public List<Character> characterList;
     public bool isInRange;
 
 
