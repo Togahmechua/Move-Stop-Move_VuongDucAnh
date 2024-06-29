@@ -6,14 +6,22 @@ public class Character : GameUnit
 {
     public delegate void CharacterDeathHandler(Character character);
     public event CharacterDeathHandler OnCharacterDeath;
+    public bool canShoot;
+    public GameObject target;
+    public AttackRange attackRange;
+
     [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
-    [SerializeField] private GameObject weapon;
-    public bool canShoot;
+    [SerializeField] private GameObject weapon; 
+    [SerializeField] protected float distance;
+    [SerializeField] private Transform model;
+
     protected bool isChecked;
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
 
     private string animName;
+    
+    
     private void Awake()
     {
         ChangeAnim(Constants.ANIM_IDLE);
@@ -33,7 +41,7 @@ public class Character : GameUnit
         //For override
     }
 
-    protected virtual void ChangeAnim(string animName)
+    public virtual void ChangeAnim(string animName)
     {
         if (this.animName != animName)
         {
@@ -43,7 +51,12 @@ public class Character : GameUnit
         }
     }
 
-    protected virtual void Shoot()
+    public void BuffScale()
+    {
+        model.localScale += new Vector3(0.25f,0.25f,0.25f);
+    }
+
+    public virtual void Shoot()
     {
         StartCoroutine(ShootBulletDelay());
     }

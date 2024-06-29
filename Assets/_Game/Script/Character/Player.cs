@@ -7,10 +7,10 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private AttackRange attackRange;
     [SerializeField] private FixedJoystick joyStick;
     [SerializeField] private float moveSpeed;
 
+    private GameObject targetBot; // Thêm biến này
 
     private void Update()
     {
@@ -39,6 +39,27 @@ public class Player : Character
                     ChangeAnim(Constants.ANIM_IDLE);
                 }
                 rb.velocity = Vector3.zero;
+            }
+        }
+
+        ActiveTarget();
+    }
+
+    private void ActiveTarget()
+    {
+        if (attackRange.isInRange && attackRange.characterList.Count > 0)
+        {
+            targetBot = attackRange.characterList[0].target;
+            if (targetBot != null)
+            {
+                targetBot.SetActive(true);
+            }
+        }
+        else
+        {
+            if (targetBot != null)
+            {
+                targetBot.SetActive(false);
             }
         }
     }

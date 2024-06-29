@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AttackRange : MonoBehaviour
 {
-    [SerializeField] private Character parent;
-    public List<Character> characterList;
+    [SerializeField] private Character parent;  
     public bool isInRange;
+    public List<Character> characterList;
+
 
 
     private void OnTriggerEnter(Collider other)

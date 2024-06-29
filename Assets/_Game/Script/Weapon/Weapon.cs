@@ -10,35 +10,49 @@ public class Weapon : GameUnit
     public bool isDestroy;
     public Character Owner { get; set; }
 
-    void Update()
+    private void OnEnable()
     {
         StartCoroutine(DestroyByTime());
+    }
+
+    void Update()
+    {
         Move();
     }
 
     private IEnumerator DestroyByTime()
     {
         yield return new WaitForSeconds(timeToDestroy);
+        DestroyWeapon();
+    }
+
+    private void DestroyWeapon()
+    {
+        if (Owner != null)
+        {
+            Owner.canShoot = true;
+        }
         SimplePool.Despawn(this);
         isDestroy = true;
-        Owner.canShoot = true;
     }
 
     private void Move()
     {
         transform.Translate(this.direction * this.moveSpeed * Time.deltaTime);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
         if (character != null && character != Owner)
         {
-            SimplePool.Despawn(this);
-            Owner.canShoot = true;
+            if (Owner != null)
+            {
+                Owner.canShoot = true;
+                Owner.BuffScale();
+            }
             character.Die();
+            SimplePool.Despawn(this);
         }
     }
-
-    
 }
