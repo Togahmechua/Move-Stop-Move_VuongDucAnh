@@ -33,6 +33,7 @@ public class Character : GameUnit
         if (OnCharacterDeath != null)
         {
             OnCharacterDeath(this);
+            LevelManager.Ins.count--;
         }
     }
 

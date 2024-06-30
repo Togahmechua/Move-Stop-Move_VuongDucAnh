@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : GameManager
 {
     private static LevelManager ins;
     public static LevelManager Ins => ins;
+    public int count = 0;
 
     [SerializeField] private List<Transform> spawnList;
-    [SerializeField] private int count = 0; 
     [SerializeField] private BotCtrl botPrefab;
 
-    private bool isCheck;
+    public bool isCheck;
 
     private void Awake()
     {
@@ -19,14 +19,14 @@ public class LevelManager : MonoBehaviour
         Spawn(0);
     }
 
-    // private void Update()
-    // {
-    //     if (count % 5 != 0 && isCheck)
-    //     {
-    //         Spawn();
-    //         isCheck = true;
-    //     }
-    // }
+    private void Update()
+    {
+        if (count != 5 && isCheck == false)
+        {
+            Spawn(1);
+            isCheck = true;
+        }
+    }
 
     public void Spawn(int num)
     {
@@ -46,8 +46,7 @@ public class LevelManager : MonoBehaviour
             break;
 
         }
-        
-    }    
+    }
 }
 
 public enum ESpawn
