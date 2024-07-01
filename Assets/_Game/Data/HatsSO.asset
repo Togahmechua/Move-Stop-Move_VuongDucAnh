@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29948f7f84ec8c540b6f5601a1c27970, type: 3}
+  m_Name: HatsSO
+  m_EditorClassIdentifier: 
+  Hatprefab:
+  - {fileID: 1220996609099099307, guid: b37d4486b9dda714ca24092aaf58e6a6, type: 3}
+  - {fileID: 8384647257895670652, guid: 2067e7e99ed6e6d46bf8ffbec2644dbc, type: 3}
+  - {fileID: 894606197909718837, guid: e604052c19a99f04baeb8f55b4b9ca91, type: 3}
+  - {fileID: 3867125588805371397, guid: 72cb8bf77211c9d4696267cf2b731d8d, type: 3}
+  - {fileID: 4139234279937485857, guid: dc860c714a279f64eb87cf6921bc42d9, type: 3}
+  - {fileID: 1047300107808212742, guid: 2b30378fedea6f7489e009b48e58c40a, type: 3}
+  - {fileID: 9031639725836745563, guid: 6f4fc7f0c7a3e8443989b096eabc9066, type: 3}
+  - {fileID: 1131634579463074262, guid: 898b8b522ce90154ca67e142e2cb96a8, type: 3}
+  - {fileID: 9170456800185637663, guid: 057e92356f3b92d4f8d3e507967c081d, type: 3}
+  - {fileID: 846177169033693745, guid: 02a573cd8f0438a49905417bdebabb64, type: 3}

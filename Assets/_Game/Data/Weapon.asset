@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fedd0593000155041a498faf77cfeeaf, type: 3}
   m_Name: Weapon
   m_EditorClassIdentifier: 
-  weaponsARR:
-  - {fileID: 5228535909183316723, guid: f956276cee398144fb5c5ff72f89576b, type: 3}
-  - {fileID: 7974810619584234155, guid: b4f5d0e2b915de144ba8b5a46805add0, type: 3}
+  weaponsArr:
+  - {fileID: 7939876977990995967, guid: d9c58d48fa08bf24bb204c1d79593421, type: 3}
+  - {fileID: 2938784450269071698, guid: 99597a47eacac554e9533c07fd7af87e, type: 3}
+  - {fileID: 337645948933129408, guid: ad2ee1e1dd41a8a4c8aad9c93a506043, type: 3}
+  - {fileID: 5755097169493056684, guid: 21598bf762c42014ab5f674320b7ac9f, type: 3}
+  - {fileID: 661869684419368109, guid: fb7767f42169ee046b178db903861376, type: 3}
+  - {fileID: 1257090398598574526, guid: a7c70a39f51db204da0978c9e6f0c3f2, type: 3}
+  - {fileID: 3181777832189122434, guid: 8c9a7ac1eaab37147bacf15b2461f6f7, type: 3}
+  - {fileID: 5271414462557112144, guid: 11f7149bcde40364db0fdf47f3598549, type: 3}
+  - {fileID: 5291219384031389102, guid: 3d67c0c58d6e122438f3eddaf9936f62, type: 3}
+  - {fileID: 7237154579752757429, guid: f6a6a2d190bdc1d4bb6af5c950a9a21d, type: 3}
+  - {fileID: 5192600689488848154, guid: 149304605e4259946a97c62bfb07f497, type: 3}
+  - {fileID: 364185672815039073, guid: e6526de4550d24243b50eca2c9b872e5, type: 3}
