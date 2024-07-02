@@ -5,16 +5,40 @@ using UnityEngine;
 
 public class CustomizeSkin : MonoBehaviour
 {
+    [SerializeField] private ColorsData colorsData;
     [SerializeField] private PantsData pantsData;
     [SerializeField] private HatsData hatsData;
     [SerializeField] private WeaponData weaponData;
-
+    
     public enum BodyPartType
     {
         None,
+        Colors,
         Hat,
         Pants,
         Weapon
+    }
+
+    [System.Serializable]
+    public class ColorsData
+    {
+        public BodyPartType bodyPartType;
+        public ColorsSO colorsSO;
+        public Renderer body;
+
+        public void RandomColorsForBots()
+        {
+            int colorsIndex = Random.Range(0, System.Enum.GetValues(typeof(Ecolor)).Length);
+            Ecolor colorsType = (Ecolor)colorsIndex;
+            Material newMaterial = colorsSO.GetColors(colorsType);
+
+            Material[] newMaterials = new Material[body.materials.Length];
+            for (int i = 0; i < newMaterials.Length; i++)
+            {
+                newMaterials[i] = newMaterial;
+            }
+            body.materials = newMaterials;
+        }
     }
 
     [System.Serializable]
@@ -72,7 +96,7 @@ public class CustomizeSkin : MonoBehaviour
         public WeaponSO weaponSO;
 
 
-        public void RandomWeaponsForBots()
+        public GameObject  RandomWeaponsForBots()
         {
             int weaponIndex = Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
             EWeapon weaponType = (EWeapon)weaponIndex;
@@ -84,23 +108,21 @@ public class CustomizeSkin : MonoBehaviour
             }
 
             // Instantiate and attach the new hat
-            Instantiate(newWeapon, pos);
+            GameObject instantiatedWeapon = Instantiate(newWeapon, pos);
+            return instantiatedWeapon;
         }
     }
 
-    public void ChangePantsExternal()
+    public void RandomSkinForBots()
     {
+        colorsData.RandomColorsForBots();
         pantsData.RandomPantsForBots();
-    }
-
-    public void ChangeHatsExternal()
-    {
         hatsData.RandomHatsForBots();
     }
 
-    public void ChangeWeaponExternal()
+    public GameObject RandomWeapon()
     {
-        weaponData.RandomWeaponsForBots();
+        return weaponData.RandomWeaponsForBots();
     }
 }
 

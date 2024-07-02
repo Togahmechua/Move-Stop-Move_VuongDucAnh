@@ -17,6 +17,7 @@ public class BotCtrl : Character
     public IdleState idleState;
     public AttackState attackState;
     public MoveState moveState;
+    [SerializeField] private CustomizeSkin customizeSkin;
 
     [SerializeField] private Vector3 _destinationPosition;
 
@@ -24,6 +25,8 @@ public class BotCtrl : Character
 
     private void Start()
     {
+        weapon = customizeSkin.RandomWeapon();
+        customizeSkin.RandomSkinForBots();
         // Initialize states
         idleState = new IdleState();
         attackState = new AttackState();

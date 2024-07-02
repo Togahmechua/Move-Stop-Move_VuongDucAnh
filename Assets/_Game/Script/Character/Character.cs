@@ -12,7 +12,7 @@ public class Character : GameUnit
 
     [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
-    [SerializeField] private GameObject weapon; 
+    [SerializeField] protected GameObject weapon; 
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
 
