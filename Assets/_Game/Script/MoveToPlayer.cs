@@ -20,7 +20,7 @@ public class MoveToPlayer : MonoBehaviour
         offset = transform.position - player.transform.position;
     }
 
-    void Update()
+    private void LateUpdate()
     {
         if (this.player != null)
         {

@@ -55,6 +55,7 @@ public class Character : GameUnit
     public void BuffScale()
     {
         model.localScale += new Vector3(0.25f,0.25f,0.25f);
+        weapon.transform.localScale += new Vector3(0.25f,0.25f,0.25f);
     }
 
     public virtual void Shoot()

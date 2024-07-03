@@ -12,7 +12,7 @@ public class IdleState : IState<BotCtrl>
 
     public void OnExecute(BotCtrl bot)
     {
-        
+        if (bot.isded == true) return;
     }
 
     public void OnExit(BotCtrl bot)

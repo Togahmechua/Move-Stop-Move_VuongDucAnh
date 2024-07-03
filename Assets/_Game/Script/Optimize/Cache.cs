@@ -29,4 +29,16 @@ public class Cache
         return weapons[collider];
     }
     
+
+    private static Dictionary<Collider, Obstacle> obstacle = new Dictionary<Collider, Obstacle>();
+
+    public static Obstacle GetObstacle(Collider collider)
+    {
+        if (!obstacle.ContainsKey(collider))
+        {
+            obstacle.Add(collider, collider.GetComponent<Obstacle>());
+        }
+
+        return obstacle[collider];
+    }
 }

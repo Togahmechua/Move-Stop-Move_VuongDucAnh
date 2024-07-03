@@ -17,6 +17,7 @@ public class AttackState : IState<BotCtrl>
 
     public void OnExecute(BotCtrl bot)
     {
+        if (bot.isded == true) return;
         if (bot.attackRange.characterList.Count <= 0 && isCheck == false)
         {
             // Debug.Log("E");

@@ -22,6 +22,7 @@ public class BotCtrl : Character
     [SerializeField] private Vector3 _destinationPosition;
 
     public Vector3 GetDestinationPosition() => _destinationPosition;
+    public bool isded;
 
     private void Start()
     {
@@ -66,8 +67,17 @@ public class BotCtrl : Character
     public override void Die()
     {
         base.Die();
-        Destroy(gameObject);
+        ChangeAnim(Constants.ANIM_Dead);
+        canShoot = false;
+        isded = true;
+        Invoke(nameof(DespawnBots),0.7f);
     }
+
+    private void DespawnBots()
+    {     
+        SimplePool.Despawn(this);
+    }
+
 
     public override void Shoot()
     {

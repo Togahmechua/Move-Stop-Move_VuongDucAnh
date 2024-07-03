@@ -24,7 +24,6 @@ public class LevelManager : MonoBehaviour
         if (count != 5 && isCheck == false)
         {
             Spawn(1);
-            isCheck = true;
         }
     }
 
@@ -32,7 +31,7 @@ public class LevelManager : MonoBehaviour
     {
         switch (num)
         {
-            case (int)ESpawn.Spawn1 :
+            case (int)ESpawn.Spawn0 :
                 for (int i = 0 ; i < 5; i++)
                 {
                     BotCtrl bot1 = SimplePool.Spawn<BotCtrl>(botPrefab, spawnList[i].position, spawnList[i].rotation);
@@ -40,7 +39,7 @@ public class LevelManager : MonoBehaviour
                 }
             break;
 
-            case (int)ESpawn.Spawn2 :
+            case (int)ESpawn.Spawn1 :
                 BotCtrl bot = SimplePool.Spawn<BotCtrl>(botPrefab, spawnList[Random.Range(0,spawnList.Count)].position, spawnList[Random.Range(0,spawnList.Count)].rotation);
                 count++;
             break;
@@ -51,6 +50,6 @@ public class LevelManager : MonoBehaviour
 
 public enum ESpawn
 {
-    Spawn1 = 0,
-    Spawn2 = 1
+    Spawn0 = 0,
+    Spawn1 = 1
 }

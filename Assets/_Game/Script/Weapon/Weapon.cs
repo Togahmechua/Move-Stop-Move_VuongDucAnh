@@ -32,6 +32,7 @@ public class Weapon : GameUnit
         {
             Owner.canShoot = true;
         }
+
         SimplePool.Despawn(this);
         isDestroy = true;
     }
@@ -51,8 +52,13 @@ public class Weapon : GameUnit
                 Owner.canShoot = true;
                 Owner.BuffScale();
             }
-            character.Die();
             SimplePool.Despawn(this);
+            character.Die();
         }
     }
+
+    // private IEnumerator WaitASec()
+    // {
+    //     yield return new WaitForSeconds
+    // }
 }

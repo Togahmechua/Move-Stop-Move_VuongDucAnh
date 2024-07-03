@@ -1072,8 +1072,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -1100,10 +1100,11 @@ MonoBehaviour:
   model: {fileID: 8387302098735712052}
   agent: {fileID: 4017962414848662064}
   rb: {fileID: 6431562604008216344}
-  moveSpeed: 5
+  moveSpeed: 8
   rangeToMove: 10
   customizeSkin: {fileID: 7326539634025537498}
   _destinationPosition: {x: 0, y: 0, z: 0}
+  isded: 0
 --- !u!195 &4017962414848662064
 NavMeshAgent:
   m_ObjectHideFlags: 0

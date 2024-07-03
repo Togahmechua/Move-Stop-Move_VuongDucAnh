@@ -9,7 +9,6 @@ public class AttackRange : MonoBehaviour
     public List<Character> characterList;
 
 
-
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
@@ -19,6 +18,12 @@ public class AttackRange : MonoBehaviour
             character.OnCharacterDeath += HandleCharacterDeath;
             characterList.Add(character);
             isInRange = true;
+        }
+
+        Obstacle obstacle = Cache.GetObstacle(other);
+        if (obstacle != null && parent is Player)
+        {
+            obstacle.Blur();
         }
     }
 
@@ -31,6 +36,12 @@ public class AttackRange : MonoBehaviour
             character.OnCharacterDeath -= HandleCharacterDeath;
             characterList.Remove(character);
             isInRange = false;
+        }
+
+        Obstacle obstacle = Cache.GetObstacle(other);
+        if (obstacle != null)
+        {
+            obstacle.DefaultColor();
         }
     }
 

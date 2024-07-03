@@ -9,6 +9,7 @@ public class Player : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private FixedJoystick joyStick;
     [SerializeField] private float moveSpeed;
+    
 
     private GameObject targetBot; // Thêm biến này
 
@@ -21,7 +22,6 @@ public class Player : Character
         {
             this.Move();
             ChangeAnim(Constants.ANIM_RUNNING);
-            canShoot = true;
             isChecked = false;
         }
         else
@@ -78,6 +78,7 @@ public class Player : Character
     public override void Die()
     {
         base.Die();
+        ChangeAnim(Constants.ANIM_Dead);
         Destroy(gameObject);
     }
 }
