@@ -441,6 +441,37 @@ Transform:
   - {fileID: 4072340640108635237}
   m_Father: {fileID: 2520365307092317926}
   m_LocalEulerAnglesHint: {x: -0.00018249612, y: 0.00048622335, z: 0.00046872091}
+--- !u!1 &1663024298415309619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4234989158065662848}
+  m_Layer: 6
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4234989158065662848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663024298415309619}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.19, z: 0.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5158129081648611891}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045442231291853118
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,6 +1006,7 @@ Transform:
   - {fileID: 4156805615953079389}
   - {fileID: 8549555488359371831}
   - {fileID: 1295319175662156678}
+  - {fileID: 4234989158065662848}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3890915475413193022
@@ -1089,13 +1121,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 057e26c02ece8c14a951b633d6937c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 2
+  poolType: 1
   canShoot: 1
   target: {fileID: 6272551146643392512}
   attackRange: {fileID: 2387066851308522596}
   anim: {fileID: 5308801987681615406}
   shootDelay: 1
-  weapon: {fileID: 0}
+  shootPos: {fileID: 4234989158065662848}
+  weaponModel: {fileID: 0}
+  wp: {fileID: 0}
   distance: 5
   model: {fileID: 8387302098735712052}
   agent: {fileID: 4017962414848662064}
@@ -1115,7 +1149,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

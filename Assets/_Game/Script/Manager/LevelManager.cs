@@ -11,8 +11,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private List<Transform> spawnList;
     [SerializeField] private BotCtrl botPrefab;
 
-    public bool isCheck;
-
     private void Awake()
     {
         LevelManager.ins = this;
@@ -21,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (count != 5 && isCheck == false)
+        if (count != 5)
         {
             Spawn(1);
         }

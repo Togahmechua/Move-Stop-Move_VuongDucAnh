@@ -94,13 +94,18 @@ public class CustomizeSkin : MonoBehaviour
         public BodyPartType bodyPartType;
         public Transform pos;
         public WeaponSO weaponSO;
+        private int test;
 
-
-        public GameObject  RandomWeaponsForBots()
+        public int RandomWPNumber()
         {
-            int weaponIndex = Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
+            return Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
+        }
+
+        public GameObject  RandomWeaponsModelForBots(int weaponEnum)
+        {
+            int weaponIndex = weaponEnum;
             EWeapon weaponType = (EWeapon)weaponIndex;
-            GameObject newWeapon = weaponSO.GetWeapons(weaponType);
+            GameObject newWeapon = weaponSO.GetWeaponsModel(weaponType);
 
             foreach (Transform child in pos)
             {
@@ -111,6 +116,20 @@ public class CustomizeSkin : MonoBehaviour
             GameObject instantiatedWeapon = Instantiate(newWeapon, pos);
             return instantiatedWeapon;
         }
+
+        public Weapon RandomWeapons(int weaponEnum)
+        {
+            int weaponIndex = weaponEnum;
+            // Debug.Log(weaponIndex);
+            EWeapon weaponType = (EWeapon)weaponIndex;
+            Weapon newWeapon = weaponSO.GetWeapons(weaponType);
+            return newWeapon;
+        }
+    }
+
+    private void Awake()
+    {
+        weaponData.RandomWPNumber();
     }
 
     public void RandomSkinForBots()
@@ -120,9 +139,14 @@ public class CustomizeSkin : MonoBehaviour
         hatsData.RandomHatsForBots();
     }
 
-    public GameObject RandomWeapon()
+    public GameObject RandomModelWeapon()
     {
-        return weaponData.RandomWeaponsForBots();
+        return weaponData.RandomWeaponsModelForBots(weaponData.RandomWPNumber());
+    }
+
+    public Weapon RandomWeapon()
+    {
+        return weaponData.RandomWeapons(weaponData.RandomWPNumber());
     }
 }
 

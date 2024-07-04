@@ -12,7 +12,9 @@ public class Character : GameUnit
 
     [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
-    [SerializeField] protected GameObject weapon; 
+    [SerializeField] private Transform shootPos;
+    [SerializeField] protected GameObject weaponModel;
+    [SerializeField] protected Weapon wp;
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
 
@@ -20,8 +22,7 @@ public class Character : GameUnit
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
 
     private string animName;
-    
-    
+
     private void Awake()
     {
         ChangeAnim(Constants.ANIM_IDLE);
@@ -54,28 +55,28 @@ public class Character : GameUnit
 
     public void BuffScale()
     {
-        model.localScale += new Vector3(0.25f,0.25f,0.25f);
-        weapon.transform.localScale += new Vector3(0.25f,0.25f,0.25f);
+        model.localScale += new Vector3(0.25f, 0.25f, 0.25f);
+        weaponModel.transform.localScale += new Vector3(0.25f, 0.25f, 0.25f);
     }
 
     public virtual void Shoot()
     {
         StartCoroutine(ShootBulletDelay());
     }
-    
-    public IEnumerator ShootBulletDelay()
+
+    private IEnumerator ShootBulletDelay()
     {
         canShoot = false;
         isAttacking = true;
-        // Tạo vũ khí mới sau khi đã hoàn thành animation tấn công
-        Weapon newWeapon = SimplePool.Spawn<Weapon>(PoolType.Weapon, TF.position, TF.rotation);
-        newWeapon.Owner = this;
         ChangeAnim(Constants.ANIM_ATTACK);
-        weapon.SetActive(false);
+        yield return new WaitForSeconds(0.2f);
+        weaponModel.SetActive(false);
+        wp.SetOwner(this);
+        wp.OnFire(shootPos, this);
         yield return new WaitForSeconds(shootDelay);
         ChangeAnim(Constants.ANIM_IDLE);
         isAttacking = false; // Đặt lại trạng thái tấn công
-        weapon.SetActive(true);
+        weaponModel.SetActive(true);
         isChecked = false; //Check điều kiện để bắn
     }
 }

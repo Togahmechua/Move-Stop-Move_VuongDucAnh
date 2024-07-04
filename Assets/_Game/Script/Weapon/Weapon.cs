@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : GameUnit
 {
-    [SerializeField] protected float moveSpeed = 1f;
+    [SerializeField] protected float moveSpeed;
     [SerializeField] protected Vector3 direction;
     [SerializeField] private float timeToDestroy;
     public bool isDestroy;
@@ -18,6 +18,16 @@ public class Weapon : GameUnit
     void Update()
     {
         Move();
+    }
+
+    public virtual void OnFire(Transform pos, Character owner)
+    {
+    //    Debug.Log("IsShooting");
+    }
+
+    public void SetOwner(Character owner)
+    {
+        this.Owner = owner;
     }
 
     private IEnumerator DestroyByTime()
@@ -56,9 +66,4 @@ public class Weapon : GameUnit
             character.Die();
         }
     }
-
-    // private IEnumerator WaitASec()
-    // {
-    //     yield return new WaitForSeconds
-    // }
 }

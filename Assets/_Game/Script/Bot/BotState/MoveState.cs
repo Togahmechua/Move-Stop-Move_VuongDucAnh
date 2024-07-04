@@ -6,7 +6,7 @@ public class MoveState : IState<BotCtrl>
 {
     private bool isCheck;
     private float time;
-    private const float maxWaitTime = 4f; // thời gian chờ tối đa trước khi thử lại
+    private const float maxWaitTime = 3f; // thời gian chờ tối đa trước khi thử lại
 
     public void OnEnter(BotCtrl bot)
     {
@@ -30,7 +30,7 @@ public class MoveState : IState<BotCtrl>
             }
             else
             {
-                bot.Wait(() => bot.TransitionToState(bot.moveState));
+                bot.Wait(() => bot.TransitionToState(bot.moveState), Random.Range(0f,2f));
                 isCheck = true;
             }
         }

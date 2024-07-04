@@ -26,6 +26,11 @@ public class Player : Character
         }
         else
         {
+            if (attackRange.characterList.Count > 0)
+            {
+                TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
+            }
+
             if (canShoot && attackRange.characterList.Count > 0 && !isChecked)
             {
                 TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);

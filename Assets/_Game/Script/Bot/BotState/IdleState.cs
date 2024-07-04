@@ -7,7 +7,7 @@ public class IdleState : IState<BotCtrl>
 {
     public void OnEnter(BotCtrl bot)
     {
-        bot.Wait(() => bot.TransitionToState(bot.moveState));
+        bot.Wait(() => bot.TransitionToState(bot.moveState), Random.Range(0f,2f));
     }
 
     public void OnExecute(BotCtrl bot)

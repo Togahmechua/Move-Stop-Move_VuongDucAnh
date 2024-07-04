@@ -26,7 +26,8 @@ public class BotCtrl : Character
 
     private void Start()
     {
-        weapon = customizeSkin.RandomWeapon();
+        weaponModel = customizeSkin.RandomModelWeapon();
+        wp = customizeSkin.RandomWeapon();
         customizeSkin.RandomSkinForBots();
         // Initialize states
         idleState = new IdleState();
@@ -39,6 +40,7 @@ public class BotCtrl : Character
 
     private void Update()
     {
+        if (isded == true) return;
         currentState?.OnExecute(this);
     }
 
@@ -51,6 +53,7 @@ public class BotCtrl : Character
 
     public void Move(int num)
     {
+        if (isded) return;
         switch (num)
         {
             case (int)Chase.Chase0:
@@ -66,10 +69,14 @@ public class BotCtrl : Character
 
     public override void Die()
     {
+        if (isded) return;
+
+        isded = true;
         base.Die();
+        agent.speed = 0;
         ChangeAnim(Constants.ANIM_Dead);
         canShoot = false;
-        isded = true;
+       
         Invoke(nameof(DespawnBots),0.7f);
     }
 
@@ -81,6 +88,8 @@ public class BotCtrl : Character
 
     public override void Shoot()
     {
+        if (isded) return;
+
         if (attackRange.isInRange && canShoot)
         {
             TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
@@ -88,19 +97,23 @@ public class BotCtrl : Character
         }
     }
 
-    public void Wait(UnityAction callBack)
+    public void Wait(UnityAction callBack, float time)
     {
-        StartCoroutine(IEWait(callBack));
+        if (isded) return;
+
+        StartCoroutine(IEWait(callBack, time));
     }
 
-    private IEnumerator IEWait(UnityAction callBack)
+    private IEnumerator IEWait(UnityAction callBack, float time)
     {
-        yield return new WaitForSeconds(Random.Range(0f, 2.5f));
+        yield return new WaitForSeconds(time);
         callBack?.Invoke();
     }
 
     public Vector3 RandomPoint()
     {
+        if (isded) return Vector3.zero;
+
         Vector3 randomPosition = Random.insideUnitSphere * rangeToMove;
         Vector3 randomPos = new Vector3(randomPosition.x, 0, randomPosition.z);
         return TF.position + randomPos; // Adjusted to be relative to bot's current position
@@ -108,6 +121,8 @@ public class BotCtrl : Character
 
     public void MoveToNewPos()
     {
+        if (isded) return;
+
         _destinationPosition = RandomPoint();
         agent.SetDestination(_destinationPosition);
     }
