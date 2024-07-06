@@ -9,6 +9,7 @@ public class CustomizeSkin : MonoBehaviour
     [SerializeField] private PantsData pantsData;
     [SerializeField] private HatsData hatsData;
     [SerializeField] private WeaponData weaponData;
+    private int num;
     
     public enum BodyPartType
     {
@@ -48,9 +49,9 @@ public class CustomizeSkin : MonoBehaviour
         public PantsSO pantsSO;
         public Renderer pants;
 
-        public void RandomPantsForBots()
+        public void SetPants(int pantEnum)
         {
-            int pantsIndex = Random.Range(0, System.Enum.GetValues(typeof(EMats)).Length);
+            int pantsIndex = pantEnum;
             EMats pantsType = (EMats)pantsIndex;
             Material newMaterial = pantsSO.GetMaterial(pantsType);
 
@@ -71,9 +72,9 @@ public class CustomizeSkin : MonoBehaviour
         public Transform pos;
         public HatsSO hatsSO;
 
-        public void RandomHatsForBots()
+        public void SetHats(int hatsEnum)
         {
-            int hatsIndex = Random.Range(0, System.Enum.GetValues(typeof(EHats)).Length);
+            int hatsIndex = hatsEnum;
             EHats hatsType = (EHats)hatsIndex;
             GameObject newHat = hatsSO.GetHats(hatsType);
 
@@ -94,14 +95,13 @@ public class CustomizeSkin : MonoBehaviour
         public BodyPartType bodyPartType;
         public Transform pos;
         public WeaponSO weaponSO;
-        private int test;
 
         public int RandomWPNumber()
         {
             return Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
         }
 
-        public GameObject  RandomWeaponsModelForBots(int weaponEnum)
+        public GameObject  SetWeaponsModelForBots(int weaponEnum)
         {
             int weaponIndex = weaponEnum;
             EWeapon weaponType = (EWeapon)weaponIndex;
@@ -117,7 +117,7 @@ public class CustomizeSkin : MonoBehaviour
             return instantiatedWeapon;
         }
 
-        public Weapon RandomWeapons(int weaponEnum)
+        public Weapon SetWeapons(int weaponEnum)
         {
             int weaponIndex = weaponEnum;
             // Debug.Log(weaponIndex);
@@ -127,26 +127,50 @@ public class CustomizeSkin : MonoBehaviour
         }
     }
 
+    #region Random for Bots
     private void Awake()
     {
-        weaponData.RandomWPNumber();
+        num = weaponData.RandomWPNumber();
     }
 
     public void RandomSkinForBots()
     {
         colorsData.RandomColorsForBots();
-        pantsData.RandomPantsForBots();
-        hatsData.RandomHatsForBots();
+        pantsData.SetPants(Random.Range(0, System.Enum.GetValues(typeof(EMats)).Length));
+        hatsData.SetHats(Random.Range(0, System.Enum.GetValues(typeof(EHats)).Length));
     }
 
     public GameObject RandomModelWeapon()
     {
-        return weaponData.RandomWeaponsModelForBots(weaponData.RandomWPNumber());
+        return weaponData.SetWeaponsModelForBots(num);
     }
 
     public Weapon RandomWeapon()
     {
-        return weaponData.RandomWeapons(weaponData.RandomWPNumber());
+        return weaponData.SetWeapons(num);
     }
+    #endregion
+
+    #region Skin for Player
+    public Weapon SetWeaponForPlayer(int wpNum)
+    {   
+        return weaponData.SetWeapons(wpNum);
+    }
+
+    public GameObject SetModelWeapon(int wpNum)
+    {
+        return weaponData.SetWeaponsModelForBots(wpNum);
+    }
+
+    public void SetPantForPlayer(int pantNum)
+    {
+        pantsData.SetPants(pantNum);
+    }
+
+    public void SetHatForPlayer(int hatNum)
+    {
+        hatsData.SetHats(hatNum);
+    }
+    #endregion
 }
 

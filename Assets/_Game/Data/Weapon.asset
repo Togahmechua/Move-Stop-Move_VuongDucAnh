@@ -15,6 +15,8 @@ MonoBehaviour:
   weaponModelArr:
   - {fileID: 7939876977990995967, guid: d9c58d48fa08bf24bb204c1d79593421, type: 3}
   - {fileID: 2938784450269071698, guid: 99597a47eacac554e9533c07fd7af87e, type: 3}
+  - {fileID: 3181777832189122434, guid: 8c9a7ac1eaab37147bacf15b2461f6f7, type: 3}
   weaponsArr:
   - {fileID: 3153544145907267639, guid: f956276cee398144fb5c5ff72f89576b, type: 3}
   - {fileID: 7538938134833467509, guid: b4f5d0e2b915de144ba8b5a46805add0, type: 3}
+  - {fileID: -8602991216980782619, guid: 3ead2dc31de3d4145adcaba867f938fd, type: 3}

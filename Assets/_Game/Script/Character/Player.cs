@@ -9,12 +9,12 @@ public class Player : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private FixedJoystick joyStick;
     [SerializeField] private float moveSpeed;
-    
+    [SerializeField] private CustomizeSkin customizeSkin;
+    private GameObject targetBot; 
 
-    private GameObject targetBot; // Thêm biến này
 
     private void Update()
-    {
+    {     
         // Kiểm tra xem nhân vật có di chuyển không
         bool isMoving = Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f;
 
@@ -85,5 +85,11 @@ public class Player : Character
         base.Die();
         ChangeAnim(Constants.ANIM_Dead);
         Destroy(gameObject);
+    }
+
+    public void ChangeWeapon(int num)
+    {
+        weaponModel = customizeSkin.SetModelWeapon(num);
+        wp = customizeSkin.SetWeaponForPlayer(num);
     }
 }
