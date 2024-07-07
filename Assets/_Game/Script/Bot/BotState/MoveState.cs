@@ -18,7 +18,10 @@ public class MoveState : IState<BotCtrl>
 
     public void OnExecute(BotCtrl bot)
     {
-        if (bot.isded == true) return; 
+        if (bot.isded == true)
+        {
+            bot.Die();
+        }
         time += Time.deltaTime;
 
         if (Vector3.Distance(bot.TF.position, bot.GetDestinationPosition()) < 0.3f && !isCheck)

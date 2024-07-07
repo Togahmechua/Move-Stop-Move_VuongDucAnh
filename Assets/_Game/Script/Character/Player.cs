@@ -11,10 +11,21 @@ public class Player : Character
     [SerializeField] private float moveSpeed;
     [SerializeField] private CustomizeSkin customizeSkin;
     private GameObject targetBot; 
+    public bool isDancing;
+    public int currentNum;
 
+
+    private void Start()
+    {
+        currentNum = PlayerPrefs.GetInt("PWeapon", 0);
+        weaponModel = customizeSkin.SetModelWeapon(currentNum);
+        wp = customizeSkin.SetWeaponForPlayer(currentNum);
+    }
 
     private void Update()
-    {     
+    {
+        if (isded == true) return;
+        if (isDancing == true) return;
         // Kiểm tra xem nhân vật có di chuyển không
         bool isMoving = Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f;
 
@@ -84,12 +95,14 @@ public class Player : Character
     {
         base.Die();
         ChangeAnim(Constants.ANIM_Dead);
-        Destroy(gameObject);
+        isded = true;
     }
 
     public void ChangeWeapon(int num)
     {
-        weaponModel = customizeSkin.SetModelWeapon(num);
-        wp = customizeSkin.SetWeaponForPlayer(num);
+        currentNum = num;
+        PlayerPrefs.SetInt("PWeapon", currentNum);
+        weaponModel = customizeSkin.SetModelWeapon(currentNum);
+        wp = customizeSkin.SetWeaponForPlayer(currentNum);
     }
 }

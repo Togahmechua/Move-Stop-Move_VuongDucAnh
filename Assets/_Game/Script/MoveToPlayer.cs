@@ -9,10 +9,13 @@ public class MoveToPlayer : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] private Vector3 startPos;
     [SerializeField] private Vector3 playPos;
+    [SerializeField] private Vector3 shopPos;
     private bool isplay;
     private bool isMainMenu;
+    private bool isActiveShop;
 
     private Vector3 offset;
+    
 
     protected virtual void Awake()
     {
@@ -45,6 +48,16 @@ public class MoveToPlayer : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, startPos, speed * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(new Vector3(10f, 0f, 0f));
             }
+            else if (isActiveShop)
+            {
+                player.isDancing = true;
+                Debug.Log("A");
+                player.ChangeAnim(Constants.ANIM_Dance);
+                // Di chuyển camera đến vị trí startPos
+                transform.position = Vector3.MoveTowards(transform.position, shopPos, speed * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(new Vector3(10f, 0f, 0f));
+                Wait(() => isActiveShop = false);
+            }
             else
             {
                 // Di chuyển camera theo nhân vật
@@ -63,12 +76,21 @@ public class MoveToPlayer : MonoBehaviour
     {
         isplay = true;
         isMainMenu = false;
+        isActiveShop = false;
     }
 
     public void MainMenu()
     {
         isplay = false;
         isMainMenu = true;
+        isActiveShop = false;
+    }
+
+    public void Shop()
+    {
+        isplay = false;
+        isMainMenu = false;
+        isActiveShop = true;
     }
 
     public void Wait(UnityAction callBack)

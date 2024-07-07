@@ -23,12 +23,12 @@ public class WeaponSO : ScriptableObject
 public enum EWeapon
 {
     Hammer = 0,
-    Candy_0 = 1
+    Candy_0 = 1,
     // Knife = 2,
     // Candy_1 = 3,
     // Bommerang = 4,
     // Candy_4 = 5,
-    // Axe_0 = 6,
+    Axe_0 = 3
     // Candy_2 = 7,
     // Axe_1 = 8,
     // Z = 9,

@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 8
-  moveSpeed: 8
+  moveSpeed: 5
   direction: {x: 0, y: 0, z: 1}
   timeToDestroy: 2
   isDestroy: 0

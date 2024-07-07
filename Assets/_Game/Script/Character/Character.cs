@@ -22,20 +22,13 @@ public class Character : GameUnit
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
 
     private string animName;
+    public bool isded;
 
-    private void Awake()
-    {
-        ChangeAnim(Constants.ANIM_IDLE);
-    }
 
     public virtual void Die()
     {
-        // Kích hoạt sự kiện OnCharacterDeath
-        if (OnCharacterDeath != null)
-        {
-            OnCharacterDeath(this);
-            LevelManager.Ins.count--;
-        }
+        OnCharacterDeath?.Invoke(this);
+        LevelManager.Ins.count--;
     }
 
     protected virtual void Move()
@@ -55,6 +48,7 @@ public class Character : GameUnit
 
     public void BuffScale()
     {
+        if (isded) return;
         model.localScale += new Vector3(0.25f, 0.25f, 0.25f);
         weaponModel.transform.localScale += new Vector3(0.25f, 0.25f, 0.25f);
     }
