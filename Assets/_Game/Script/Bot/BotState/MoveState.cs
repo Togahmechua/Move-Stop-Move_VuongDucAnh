@@ -6,10 +6,11 @@ public class MoveState : IState<BotCtrl>
 {
     private bool isCheck;
     private float time;
-    private const float maxWaitTime = 3f; // thời gian chờ tối đa trước khi thử lại
+    private const float maxWaitTime = 4f; // thời gian chờ tối đa trước khi thử lại
 
     public void OnEnter(BotCtrl bot)
     {
+        // Debug.Log("Is moving");
         bot.ChangeAnim(Constants.ANIM_RUNNING);
         bot.MoveToNewPos();
         isCheck = false;
@@ -20,8 +21,9 @@ public class MoveState : IState<BotCtrl>
     {
         if (bot.isded == true)
         {
-            bot.Die();
+            bot.TransitionToState(bot.dieState);
         }
+        
         time += Time.deltaTime;
 
         if (Vector3.Distance(bot.TF.position, bot.GetDestinationPosition()) < 0.3f && !isCheck)

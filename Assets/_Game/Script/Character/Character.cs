@@ -9,6 +9,7 @@ public class Character : GameUnit
     public bool canShoot;
     public GameObject target;
     public AttackRange attackRange;
+    public bool isded;
 
     [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
@@ -17,18 +18,21 @@ public class Character : GameUnit
     [SerializeField] protected Weapon wp;
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
+    [SerializeField] protected Renderer pants;
+    [SerializeField] protected Transform hatPos;
+    [SerializeField] protected Transform wpPos;
 
     protected bool isChecked;
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
 
     private string animName;
-    public bool isded;
-
+    protected float cooldown = 0.4f;
+    protected float timeToShoot;
 
     public virtual void Die()
     {
         OnCharacterDeath?.Invoke(this);
-        LevelManager.Ins.count--;
+        // LevelManager.Ins.count--;
     }
 
     protected virtual void Move()

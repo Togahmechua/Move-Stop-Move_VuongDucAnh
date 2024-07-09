@@ -9,22 +9,25 @@ public class Player : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private FixedJoystick joyStick;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private CustomizeSkin customizeSkin;
-    private GameObject targetBot; 
+    private GameObject targetBot;
     public bool isDancing;
     public int currentNum;
-
 
     private void Start()
     {
         currentNum = PlayerPrefs.GetInt("PWeapon", 0);
-        weaponModel = customizeSkin.SetModelWeapon(currentNum);
-        wp = customizeSkin.SetWeaponForPlayer(currentNum);
+        weaponModel = GameData.Ins.SetModelWeapon(currentNum, wpPos);
+        wp = GameData.Ins.SetWeaponForPlayer(currentNum);
     }
 
     private void Update()
     {
-        if (isded == true) return;
+        if (isded == true)
+        {
+            Die();
+            this.gameObject.SetActive(false);
+        }
+
         if (isDancing == true) return;
         // Kiểm tra xem nhân vật có di chuyển không
         bool isMoving = Mathf.Abs(joyStick.Vertical) > 0.001f || Mathf.Abs(joyStick.Horizontal) > 0.001f;
@@ -42,11 +45,16 @@ public class Player : Character
                 TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
             }
 
-            if (canShoot && attackRange.characterList.Count > 0 && !isChecked)
+            timeToShoot += Time.deltaTime; // Tăng thời gian chờ
+
+            if (canShoot && attackRange.characterList.Count > 0 && !isChecked && timeToShoot >= cooldown)
             {
                 TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
+                Debug.Log("Shoot");
                 Shoot();
+                rb.velocity = Vector3.zero;
                 isChecked = true;
+                timeToShoot = 0f; // Đặt lại thời gian chờ
             }
             else
             {
@@ -95,14 +103,13 @@ public class Player : Character
     {
         base.Die();
         ChangeAnim(Constants.ANIM_Dead);
-        isded = true;
     }
 
     public void ChangeWeapon(int num)
     {
         currentNum = num;
         PlayerPrefs.SetInt("PWeapon", currentNum);
-        weaponModel = customizeSkin.SetModelWeapon(currentNum);
-        wp = customizeSkin.SetWeaponForPlayer(currentNum);
+        weaponModel = GameData.Ins.SetModelWeapon(currentNum, wpPos);
+        wp = GameData.Ins.SetWeaponForPlayer(currentNum);
     }
 }

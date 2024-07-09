@@ -19,9 +19,14 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (count != 5)
+        if (count < 5)
         {
             Spawn(1);
+        }
+
+        if (count <= 0)
+        {
+            count = 0;
         }
     }
 

@@ -17,21 +17,23 @@ public class BotCtrl : Character
     public IdleState idleState;
     public AttackState attackState;
     public MoveState moveState;
-    [SerializeField] private CustomizeSkin customizeSkin;
+    public DieState dieState;
 
+    [SerializeField] private Renderer body;
     [SerializeField] private Vector3 _destinationPosition;
 
     public Vector3 GetDestinationPosition() => _destinationPosition;
 
     private void Start()
     {
-        weaponModel = customizeSkin.RandomModelWeapon();
-        wp = customizeSkin.RandomWeapon();
-        customizeSkin.RandomSkinForBots();
+        weaponModel = GameData.Ins.RandomModelWeapon(wpPos);
+        wp = GameData.Ins.RandomWeapon();
+        GameData.Ins.RandomSkinForBots(body, pants, hatPos);
         // Initialize states
         idleState = new IdleState();
         attackState = new AttackState();
         moveState = new MoveState();
+        dieState = new DieState();
 
         //Start in Idle state
         TransitionToState(idleState);
@@ -39,8 +41,12 @@ public class BotCtrl : Character
 
     private void Update()
     {
-        if (isded == true) return;
         currentState?.OnExecute(this);
+
+        if (isded == true)
+        {
+            TransitionToState(dieState);
+        }
     }
 
     public void TransitionToState(IState<BotCtrl> newState)
@@ -52,7 +58,6 @@ public class BotCtrl : Character
 
     public void Move(int num)
     {
-        if (isded) return;
         switch (num)
         {
             case (int)Chase.Chase0:
@@ -68,14 +73,12 @@ public class BotCtrl : Character
 
     public override void Die()
     {
-        base.Die();
-        isded = true;
-        
+        base.Die();    
         agent.speed = 0;
         ChangeAnim(Constants.ANIM_Dead);
         canShoot = false;
        
-        Invoke(nameof(DespawnBots),1f);
+        Invoke(nameof(DespawnBots),0.7f);
     }
 
     private void DespawnBots()
@@ -86,19 +89,20 @@ public class BotCtrl : Character
 
     public override void Shoot()
     {
-        if (isded) return;
-
         if (attackRange.isInRange && canShoot)
         {
-            TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
-            base.Shoot();
+            timeToShoot += Time.deltaTime;
+            if (timeToShoot >= cooldown)
+            {
+                TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
+                base.Shoot();
+                timeToShoot = 0f;
+            }
         }
     }
 
     public void Wait(UnityAction callBack, float time)
     {
-        if (isded) return;
-
         StartCoroutine(IEWait(callBack, time));
     }
 
@@ -119,8 +123,6 @@ public class BotCtrl : Character
 
     public void MoveToNewPos()
     {
-        if (isded) return;
-
         _destinationPosition = RandomPoint();
         agent.SetDestination(_destinationPosition);
     }

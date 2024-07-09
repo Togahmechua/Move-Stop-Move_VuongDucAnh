@@ -14,7 +14,7 @@ public class IdleState : IState<BotCtrl>
     {
         if (bot.isded == true)
         {
-            bot.Die();
+            bot.TransitionToState(bot.dieState);
         }
     }
 

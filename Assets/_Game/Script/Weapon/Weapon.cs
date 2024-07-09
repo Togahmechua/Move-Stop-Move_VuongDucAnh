@@ -63,7 +63,7 @@ public class Weapon : GameUnit
                 Owner.BuffScale();
             }
             SimplePool.Despawn(this);
-            character.Die();
+            character.isded = true;
         }
     }
 }

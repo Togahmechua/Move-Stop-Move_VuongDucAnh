@@ -45,7 +45,7 @@ Animator:
   m_GameObject: {fileID: 30492478257342749}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 55d0c3913dfe7624080e85706112e74e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 671a9d1dc388714409b1707e559b070e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -466,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 1663024298415309619}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.19, z: 0.52}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -980,7 +980,6 @@ GameObject:
   - component: {fileID: 3509800925910007121}
   - component: {fileID: 6431562604008216344}
   - component: {fileID: 5817842040147711665}
-  - component: {fileID: 7326539634025537498}
   - component: {fileID: 4017962414848662064}
   m_Layer: 7
   m_Name: Bot
@@ -1132,41 +1131,16 @@ MonoBehaviour:
   wp: {fileID: 0}
   distance: 5
   model: {fileID: 8387302098735712052}
+  pants: {fileID: 6908801572111220202}
+  hatPos: {fileID: 4514025988795435645}
+  wpPos: {fileID: 8440128981077162191}
+  isded: 0
   agent: {fileID: 4017962414848662064}
   rb: {fileID: 6431562604008216344}
   moveSpeed: 8
   rangeToMove: 10
-  customizeSkin: {fileID: 7326539634025537498}
+  body: {fileID: 4119049777007199167}
   _destinationPosition: {x: 0, y: 0, z: 0}
-  isded: 0
---- !u!114 &7326539634025537498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2884420855353154520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a42e64ac19c5d44199386c96555fc2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  colorsData:
-    bodyPartType: 1
-    colorsSO: {fileID: 11400000, guid: fa905dd576a6b5544bb5815c1f663011, type: 2}
-    body: {fileID: 4119049777007199167}
-  pantsData:
-    bodyPartType: 3
-    pantsSO: {fileID: 11400000, guid: e8e7a885c2fc4414fa5abe9f2b7ccf67, type: 2}
-    pants: {fileID: 6908801572111220202}
-  hatsData:
-    bodyPartType: 2
-    pos: {fileID: 4514025988795435645}
-    hatsSO: {fileID: 11400000, guid: be3f2ad546b82ab48983b4a92dbdf6c5, type: 2}
-  weaponData:
-    bodyPartType: 4
-    pos: {fileID: 8440128981077162191}
-    weaponSO: {fileID: 11400000, guid: eb404ca6df7561646b64805c127e65e6, type: 2}
 --- !u!195 &4017962414848662064
 NavMeshAgent:
   m_ObjectHideFlags: 0

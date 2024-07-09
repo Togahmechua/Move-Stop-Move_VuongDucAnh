@@ -51,7 +51,6 @@ public class MoveToPlayer : MonoBehaviour
             else if (isActiveShop)
             {
                 player.isDancing = true;
-                Debug.Log("A");
                 player.ChangeAnim(Constants.ANIM_Dance);
                 // Di chuyển camera đến vị trí startPos
                 transform.position = Vector3.MoveTowards(transform.position, shopPos, speed * Time.deltaTime);
