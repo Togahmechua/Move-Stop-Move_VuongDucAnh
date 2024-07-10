@@ -44,6 +44,8 @@ public class MoveToPlayer : MonoBehaviour
             }
             else if (isMainMenu)
             {
+                player.isDancing = false;
+                player.ChangeAnim(Constants.ANIM_IDLE);
                 // Di chuyển camera đến vị trí startPos
                 transform.position = Vector3.MoveTowards(transform.position, startPos, speed * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(new Vector3(10f, 0f, 0f));

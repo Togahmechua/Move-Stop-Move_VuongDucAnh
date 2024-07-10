@@ -18,8 +18,8 @@ public class Character : GameUnit
     [SerializeField] protected Weapon wp;
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
-    [SerializeField] protected Renderer pants;
-    [SerializeField] protected Transform hatPos;
+    public Renderer pants;
+    public Transform hatPos;
     [SerializeField] protected Transform wpPos;
 
     protected bool isChecked;
