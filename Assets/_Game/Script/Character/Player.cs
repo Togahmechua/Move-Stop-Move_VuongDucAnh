@@ -50,7 +50,7 @@ public class Player : Character
             if (canShoot && attackRange.characterList.Count > 0 && !isChecked && timeToShoot >= cooldown)
             {
                 TF.rotation = Quaternion.LookRotation(attackRange.characterList[0].TF.position - TF.position);
-                Debug.Log("Shoot");
+                // Debug.Log("Shoot");
                 Shoot();
                 rb.velocity = Vector3.zero;
                 isChecked = true;

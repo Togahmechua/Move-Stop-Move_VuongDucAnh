@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ColorsSO
   m_EditorClassIdentifier: 
   matsArr:
-  - {fileID: 2100000, guid: 72dcac25ceb3ef54cb60538495492cfc, type: 2}
+  - {fileID: 2100000, guid: 666acddc06f3b6c41a202029989e79a2, type: 2}
   - {fileID: 2100000, guid: 84fbe073ccc425843b74a5178dc15a31, type: 2}
   - {fileID: 2100000, guid: abc2f139032a88b45bc0a8d836ca31fb, type: 2}
   - {fileID: 2100000, guid: 5b5751735a291054f996ae71836b7360, type: 2}

@@ -10,6 +10,8 @@ public class Character : GameUnit
     public GameObject target;
     public AttackRange attackRange;
     public bool isded;
+    public Renderer pants;
+    public Transform hatPos;
 
     [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
@@ -18,16 +20,19 @@ public class Character : GameUnit
     [SerializeField] protected Weapon wp;
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
-    public Renderer pants;
-    public Transform hatPos;
     [SerializeField] protected Transform wpPos;
+    [SerializeField] protected Transform shieldPos;
+    [SerializeField] protected Transform tailPos;
+    [SerializeField] protected Transform wingPos;
+    [SerializeField] protected Renderer body;
 
     protected bool isChecked;
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
+    protected float cooldown = 0.4f;
+    protected float timeToShoot; 
 
     private string animName;
-    protected float cooldown = 0.4f;
-    protected float timeToShoot;
+    
 
     public virtual void Die()
     {

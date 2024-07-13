@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,12 +22,10 @@ public class UICShopSkin : UICanvas
     private int selectedItemID;
     private UIShopItem selectedItemUI;
     private UIShopItem equippedItemUI;
-    private Player player;
 
     private void Awake()
     {
         UICShopSkin.ins = this;
-        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     void Start()
@@ -46,8 +43,14 @@ public class UICShopSkin : UICanvas
 
     private void UnequipSkin()
     {
-        GameData.Ins.SetHatForPlayer(10, player.hatPos);
-        
+        if (equippedItemUI != null)
+        {
+            equippedItemUI.SetEquip(false);
+            equippedItemUI = null;
+        }
+        GameData.Ins.SetHatForPlayer(10, LevelManager.Ins.player.hatPos);
+        equippedButton.gameObject.SetActive(true);
+        unEquippedButton.gameObject.SetActive(false);
     }
 
     public void ShowItemInfo(int id)
@@ -58,8 +61,10 @@ public class UICShopSkin : UICanvas
             selectedItemID = id;
             selectedItemUI = FindUIShopItemById(id);
 
-            lockButton.gameObject.SetActive(true);
-            equippedButton.gameObject.SetActive(false);
+            lockButton.gameObject.SetActive(!selectedItemUI.IsBought);
+            equippedButton.gameObject.SetActive(selectedItemUI.IsBought && !selectedItemUI.isEquip);
+            unEquippedButton.gameObject.SetActive(selectedItemUI.IsBought && selectedItemUI.isEquip);
+
             money.text = itemConfig.Price.ToString("");
         }
     }
@@ -69,9 +74,14 @@ public class UICShopSkin : UICanvas
         ShopItemDataConfig itemConfig = shopItemDataSO.dataConfigs.Find(item => item.ID == id);
         if (itemConfig != null)
         {
+            selectedItemID = id;
+            selectedItemUI = FindUIShopItemById(id);
+
             lockButton.gameObject.SetActive(false);
+            equippedButton.gameObject.SetActive(!selectedItemUI.isEquip);
+            unEquippedButton.gameObject.SetActive(selectedItemUI.isEquip);
+
             money.text = "Bought";
-            equippedButton.gameObject.SetActive(true);
         }
     }
 
@@ -98,9 +108,10 @@ public class UICShopSkin : UICanvas
 
             equippedItemUI = selectedItemUI;
             selectedItemUI.SetEquip(true);
+
+            equippedButton.gameObject.SetActive(false);
+            unEquippedButton.gameObject.SetActive(true);
         }
-        equippedButton.gameObject.SetActive(false);
-        unEquippedButton.gameObject.SetActive(true);
     }
 
     private void OnXButtonClick()
@@ -118,8 +129,11 @@ public class UICShopSkin : UICanvas
 
         if (!anyItemEquipped)
         {
-            GameData.Ins.SetHatForPlayer(10, player.hatPos);
+            GameData.Ins.SetHatForPlayer(10, LevelManager.Ins.player.hatPos);
         }
+
+        equippedButton.gameObject.SetActive(false);
+        unEquippedButton.gameObject.SetActive(false);
     }
 
     private UIShopItem FindUIShopItemById(int id)

@@ -15,7 +15,7 @@ public class ColorsSO : ScriptableObject
 
 public enum Ecolor
 {
-    Red = 0,
+    Unk = 0,
     Blue = 1,
     Green = 2,
     Orange = 3,

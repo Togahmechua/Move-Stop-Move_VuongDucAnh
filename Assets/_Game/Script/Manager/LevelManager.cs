@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
     private static LevelManager ins;
     public static LevelManager Ins => ins;
-    public int count = 0;
 
+    public int count = 0;
+    public Player player;
+    public Button starButton;
+    
     [SerializeField] private List<Transform> spawnList;
     [SerializeField] private BotCtrl botPrefab;
+    
 
     private void Awake()
     {
         LevelManager.ins = this;
         Spawn(0);
     }
+
 
     private void Update()
     {

@@ -24,5 +24,6 @@ public enum EHats
     Hat_Yellow = 6,
     Headphone = 7,
     Horn = 8,
-    Mustache = 9
+    Mustache = 9,
+    None = 10
 }

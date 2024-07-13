@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class BotCtrl : Character
@@ -12,16 +13,15 @@ public class BotCtrl : Character
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rangeToMove;
+    [SerializeField] private Vector3 _destinationPosition;
+
 
     public IState<BotCtrl> currentState;
+    public StartState startState;
     public IdleState idleState;
     public AttackState attackState;
     public MoveState moveState;
     public DieState dieState;
-
-    [SerializeField] private Renderer body;
-    [SerializeField] private Vector3 _destinationPosition;
-
     public Vector3 GetDestinationPosition() => _destinationPosition;
 
     private void Start()
@@ -30,12 +30,19 @@ public class BotCtrl : Character
         wp = GameData.Ins.RandomWeapon();
         GameData.Ins.RandomSkinForBots(body, pants, hatPos);
         // Initialize states
+
+        startState = new StartState();
         idleState = new IdleState();
         attackState = new AttackState();
         moveState = new MoveState();
         dieState = new DieState();
-
         //Start in Idle state
+        TransitionToState(startState);
+        LevelManager.Ins.starButton.onClick.AddListener(TransToIdleState);
+    }
+
+    private void TransToIdleState()
+    {
         TransitionToState(idleState);
     }
 

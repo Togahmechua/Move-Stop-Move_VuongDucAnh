@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class UIShopItem : MonoBehaviour
 {
     private ShopItemDataConfig DataConfig;
+    private bool isBought;
+    private Player player;
+
     public Button BtnSelect;
     public Image ImgIcon;
     public GameObject GoLock;
     public GameObject equippedText;
     public int id;
-    private bool isBought;
-    private Player player;
     public bool isEquip { get; private set; }
+    public bool IsBought => isBought; // Added to expose isBought property
 
     void Start()
     {
@@ -54,13 +56,5 @@ public class UIShopItem : MonoBehaviour
     {
         isEquip = equip;
         equippedText.SetActive(equip);
-    }
-
-    public void Xbutton()
-    {
-        if (!isEquip)
-        {
-            GameData.Ins.SetHatForPlayer(10, player.hatPos);
-        }
     }
 }
