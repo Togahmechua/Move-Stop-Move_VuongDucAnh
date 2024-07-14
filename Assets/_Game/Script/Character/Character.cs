@@ -12,6 +12,10 @@ public class Character : GameUnit
     public bool isded;
     public Renderer pants;
     public Transform hatPos;
+    public Transform shieldPos;
+    public Renderer body;
+    public Transform tailPos;
+    public Transform wingPos;
 
     [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
@@ -21,10 +25,8 @@ public class Character : GameUnit
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
     [SerializeField] protected Transform wpPos;
-    [SerializeField] protected Transform shieldPos;
-    [SerializeField] protected Transform tailPos;
-    [SerializeField] protected Transform wingPos;
-    [SerializeField] protected Renderer body;
+
+
 
     protected bool isChecked;
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
@@ -37,7 +39,7 @@ public class Character : GameUnit
     public virtual void Die()
     {
         OnCharacterDeath?.Invoke(this);
-        // LevelManager.Ins.count--;
+        LevelManager.Ins.count--;
     }
 
     protected virtual void Move()

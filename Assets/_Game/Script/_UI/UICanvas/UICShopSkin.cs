@@ -34,6 +34,16 @@ public class UICShopSkin : UICanvas
         equippedButton.onClick.AddListener(EquipItem);
         unEquippedButton.onClick.AddListener(UnequipSkin);
         XButton.onClick.AddListener(OnXButtonClick);
+        InitializeShopItems();
+    }
+
+    private void InitializeShopItems()
+    {
+        foreach (Transform child in pos)
+        {
+            Destroy(child.gameObject); // Clear previous items
+        }
+
         for (int i = 0; i < shopItemDataSO.dataConfigs.Count; i++)
         {
             UIShopItem uiItem = Instantiate(UIShopItemPrefab, pos);
@@ -48,7 +58,7 @@ public class UICShopSkin : UICanvas
             equippedItemUI.SetEquip(false);
             equippedItemUI = null;
         }
-        GameData.Ins.SetHatForPlayer(10, LevelManager.Ins.player.hatPos);
+        GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
         equippedButton.gameObject.SetActive(true);
         unEquippedButton.gameObject.SetActive(false);
     }
@@ -114,7 +124,7 @@ public class UICShopSkin : UICanvas
         }
     }
 
-    private void OnXButtonClick()
+    public void OnXButtonClick()
     {
         bool anyItemEquipped = false;
         foreach (Transform child in pos)
@@ -129,7 +139,7 @@ public class UICShopSkin : UICanvas
 
         if (!anyItemEquipped)
         {
-            GameData.Ins.SetHatForPlayer(10, LevelManager.Ins.player.hatPos);
+            GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
         }
 
         equippedButton.gameObject.SetActive(false);

@@ -10,6 +10,7 @@ public class MoveToPlayer : MonoBehaviour
     [SerializeField] private Vector3 startPos;
     [SerializeField] private Vector3 playPos;
     [SerializeField] private Vector3 shopPos;
+    public Animator animator;
     private bool isplay;
     private bool isMainMenu;
     private bool isActiveShop;
@@ -26,6 +27,7 @@ public class MoveToPlayer : MonoBehaviour
     {
         // Tính offset giữa vị trí của camera và vị trí của nhân vật
         offset = transform.position - player.transform.position;
+        TurnOffAnim();
     }
 
     private void LateUpdate()
@@ -104,6 +106,11 @@ public class MoveToPlayer : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         offset = transform.position - player.transform.position;
         callBack?.Invoke();
+    }
+
+    public void TurnOffAnim()
+    {
+        animator.enabled = false;
     }
 
 }

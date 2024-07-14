@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c3d05577b95646b83b8c9d62ceebc, type: 3}
+  m_Name: SkinData
+  m_EditorClassIdentifier: 
+  dataConfigs:
+  - ID: 1
+    spriteIcon: {fileID: 21300000, guid: 54dbbd9df889f0141877981f866ba419, type: 3}
+    Price: 1
+    isLock: 1
+    isEquip: 0
+    isUnequip: 0
+    eskinType: 3
+  - ID: 2
+    spriteIcon: {fileID: 21300000, guid: e949e31a829aafb49abe7aa6108ab521, type: 3}
+    Price: 2
+    isLock: 1
+    isEquip: 0
+    isUnequip: 0
+    eskinType: 3
+  - ID: 3
+    spriteIcon: {fileID: 21300000, guid: 25e2e3dc2e24ba549bbbae5479865bbf, type: 3}
+    Price: 3
+    isLock: 1
+    isEquip: 0
+    isUnequip: 0
+    eskinType: 3
+  - ID: 4
+    spriteIcon: {fileID: 21300000, guid: 25e2e3dc2e24ba549bbbae5479865bbf, type: 3}
+    Price: 4
+    isLock: 1
+    isEquip: 0
+    isUnequip: 0
+    eskinType: 3
+  - ID: 5
+    spriteIcon: {fileID: 21300000, guid: 25e2e3dc2e24ba549bbbae5479865bbf, type: 3}
+    Price: 5
+    isLock: 1
+    isEquip: 0
+    isUnequip: 0
+    eskinType: 3

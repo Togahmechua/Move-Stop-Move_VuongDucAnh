@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIShopItem : MonoBehaviour
+public class UIShopPant : MonoBehaviour
 {
     private ShopItemDataConfig DataConfig;
     private bool isBought;
@@ -36,12 +36,12 @@ public class UIShopItem : MonoBehaviour
     {
         if (!isBought)
         {
-            UICShopSkin.Ins.ShowItemInfo(id);
+            UICPantSkin.Ins.ShowItemInfo(id);
             EquipItemToPlayer();
         }
         else
         {
-            UICShopSkin.Ins.ShowBoughtItemInfo(id);
+            UICPantSkin.Ins.ShowBoughtItemInfo(id);
             EquipItemToPlayer();
         }
     }

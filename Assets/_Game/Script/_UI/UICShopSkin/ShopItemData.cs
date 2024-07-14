@@ -14,5 +14,16 @@ public class ShopItemDataConfig {
     public int ID;
     public Sprite spriteIcon;
     public float Price;
-    
+    public bool isLock = true;
+    public bool isEquip = false;
+    public bool isUnequip = false;
+    public EskinType eskinType;
+}
+
+public enum EskinType
+{
+    Hat,
+    Pant,
+    Shield,
+    Skin
 }
