@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8387302098735712052}
   - component: {fileID: 5308801987681615406}
+  - component: {fileID: 2845708720637572325}
   m_Layer: 0
   m_Name: Character_Optimieze2
   m_TagString: Untagged
@@ -56,6 +57,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2845708720637572325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30492478257342749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2684a5ca8dc682043b0414ebd933ed50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 0
+  TfWeaponHolder: {fileID: 8440128981077162191}
+  PantRenderer: {fileID: 6908801572111220202}
+  hatPos: {fileID: 4514025988795435645}
+  shieldPos: {fileID: 8257677747495191158}
+  body: {fileID: 4119049777007199167}
 --- !u!1 &253976724397029097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,8 +1144,7 @@ MonoBehaviour:
   target: {fileID: 6272551146643392512}
   attackRange: {fileID: 2387066851308522596}
   isded: 0
-  pants: {fileID: 6908801572111220202}
-  hatPos: {fileID: 4514025988795435645}
+  fullSetItem: {fileID: 2845708720637572325}
   anim: {fileID: 5308801987681615406}
   shootDelay: 1
   shootPos: {fileID: 4234989158065662848}
@@ -1134,13 +1152,10 @@ MonoBehaviour:
   wp: {fileID: 0}
   distance: 5
   model: {fileID: 8387302098735712052}
-  wpPos: {fileID: 8440128981077162191}
-  shieldPos: {fileID: 8257677747495191158}
   agent: {fileID: 4017962414848662064}
   rb: {fileID: 6431562604008216344}
   moveSpeed: 8
   rangeToMove: 5
-  body: {fileID: 4119049777007199167}
   _destinationPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &4017962414848662064
 NavMeshAgent:

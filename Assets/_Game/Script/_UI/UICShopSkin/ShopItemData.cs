@@ -18,6 +18,7 @@ public class ShopItemDataConfig {
     public bool isEquip = false;
     public bool isUnequip = false;
     public EskinType eskinType;
+    public EBuffType eBuffType;
 }
 
 public enum EskinType
@@ -26,4 +27,13 @@ public enum EskinType
     Pant,
     Shield,
     Skin
+}
+
+public enum EBuffType
+{
+    None = 0,
+    AttackRange = 1,
+    MoveSpeed = 2,
+    Gold = 3,
+    AttackSpeed = 4
 }

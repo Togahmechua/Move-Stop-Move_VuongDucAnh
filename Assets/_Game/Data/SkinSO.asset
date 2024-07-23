@@ -13,45 +13,9 @@ MonoBehaviour:
   m_Name: SkinSO
   m_EditorClassIdentifier: 
   sets:
-  - setSkinType: 0
-    hat: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    other: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    tail: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    wing: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    pant: {fileID: 2100000, guid: a96ce2bf8b6418d40a923213ce4befa3, type: 2}
-    color: {fileID: 2100000, guid: 72dcac25ceb3ef54cb60538495492cfc, type: 2}
-  - setSkinType: 1
-    hat: {fileID: 5747334898328241513, guid: 98faa4ac8512f3a439215326f62ebea8, type: 3}
-    other: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    tail: {fileID: 5974826441641929100, guid: 8d297c4dbb8973f46a20fa164cbd010b, type: 3}
-    wing: {fileID: 1805976007747735261, guid: 3dbb661f29ba89744a20ec3776680f59, type: 3}
-    pant: {fileID: 2100000, guid: 72dcac25ceb3ef54cb60538495492cfc, type: 2}
-    color: {fileID: 2100000, guid: 72dcac25ceb3ef54cb60538495492cfc, type: 2}
-  - setSkinType: 2
-    hat: {fileID: 3309300495622495407, guid: b118f2a267173d34fb9f76baf9af77df, type: 3}
-    other: {fileID: 6253341048242763841, guid: ab1919843e1a3154ebdf17019829a173, type: 3}
-    tail: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    wing: {fileID: 1158695091266752316, guid: c4ac8194b1dc15e46a60af5452dafdd1, type: 3}
-    pant: {fileID: 2100000, guid: 6bec542acbc527a49a2f7a4dc83a3c19, type: 2}
-    color: {fileID: 2100000, guid: f4e45dba16c0e6444a7cd71431e3a3cc, type: 2}
-  - setSkinType: 3
-    hat: {fileID: 53979261948037543, guid: 408464b9f56fe5740b0b93888eb3191a, type: 3}
-    other: {fileID: 5755160538842429132, guid: f2708ce89e7334249aa9405c7112e261, type: 3}
-    tail: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    wing: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    pant: {fileID: 2100000, guid: a96ce2bf8b6418d40a923213ce4befa3, type: 2}
-    color: {fileID: 2100000, guid: 73f833f0c9b262c4aa98a7d9f83c24cb, type: 2}
-  - setSkinType: 4
-    hat: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    other: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    tail: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    wing: {fileID: 3530254997127687801, guid: d4f884f491d9a0a41a24456d29fdc4cc, type: 3}
-    pant: {fileID: 2100000, guid: a96ce2bf8b6418d40a923213ce4befa3, type: 2}
-    color: {fileID: 2100000, guid: a633bcec664436a4e871f2feb4ff5a64, type: 2}
-  - setSkinType: 5
-    hat: {fileID: 1246611021361397560, guid: a48f8d619b47a79468949696a5b6cc7c, type: 3}
-    other: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    tail: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    wing: {fileID: 846177169033693745, guid: 37db6ca6104e25045946410fa03bde89, type: 3}
-    pant: {fileID: 2100000, guid: a96ce2bf8b6418d40a923213ce4befa3, type: 2}
-    color: {fileID: 2100000, guid: 82d7f49b06c6e664c8bb405e21f4f682, type: 2}
+  - {fileID: 5393038594775323473, guid: 335f449c7616f364bae781d2e1c181f7, type: 3}
+  - {fileID: 4097237646794107855, guid: 775e64d6cdcf5704f95c6aba231c1267, type: 3}
+  - {fileID: 2921285053971672977, guid: 2e60aca53d5649a478572ed72b550ab8, type: 3}
+  - {fileID: 2973032808449140757, guid: 0cc472aca137eb540808e95c6836df18, type: 3}
+  - {fileID: 8823412610041151271, guid: d33840d72d1c66d45a2f9d229162cc1c, type: 3}
+  - {fileID: 7845021314523772203, guid: 7c7b1625b88f17140b24ab2c967693bb, type: 3}

@@ -58,7 +58,7 @@ public class UICShopSkin : UICanvas
             equippedItemUI.SetEquip(false);
             equippedItemUI = null;
         }
-        GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
+        // GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
         equippedButton.gameObject.SetActive(true);
         unEquippedButton.gameObject.SetActive(false);
     }
@@ -139,7 +139,7 @@ public class UICShopSkin : UICanvas
 
         if (!anyItemEquipped)
         {
-            GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
+            // GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
         }
 
         equippedButton.gameObject.SetActive(false);

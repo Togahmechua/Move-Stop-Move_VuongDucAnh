@@ -26,9 +26,19 @@ public class BotCtrl : Character
 
     private void Start()
     {
-        weaponModel = GameData.Ins.RandomModelWeapon(wpPos);
-        wp = GameData.Ins.RandomWeapon();
-        GameData.Ins.RandomSkinForBots(body, pants, hatPos);
+        int rand = Random.Range(0,2);
+        if (rand == 0)
+        {
+            GameData.Ins.RandomSkinForBots(fullSetItem.body, fullSetItem.PantRenderer, fullSetItem.hatPos);
+        }
+        else
+        {
+            GameData.Ins.SetSkin(this, Random.Range(0, System.Enum.GetValues(typeof(ESetSkin)).Length));
+        }
+        int num = Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
+        weaponModel = GameData.Ins.RandomModelWeapon(num, fullSetItem.TfWeaponHolder);
+        wp = GameData.Ins.RandomWeapon(num);
+        
         // Initialize states
 
         startState = new StartState();
@@ -85,7 +95,7 @@ public class BotCtrl : Character
         ChangeAnim(Constants.ANIM_Dead);
         canShoot = false;
        
-        Invoke(nameof(DespawnBots),0.7f);
+        Invoke(nameof(DespawnBots),1f);
     }
 
     private void DespawnBots()
@@ -125,7 +135,7 @@ public class BotCtrl : Character
 
         Vector3 randomPosition = Random.insideUnitSphere * rangeToMove;
         Vector3 randomPos = new Vector3(randomPosition.x, 0, randomPosition.z);
-        return TF.position + randomPos; // Adjusted to be relative to bot's current position
+        return TF.position + randomPos;
     }
 
     public void MoveToNewPos()

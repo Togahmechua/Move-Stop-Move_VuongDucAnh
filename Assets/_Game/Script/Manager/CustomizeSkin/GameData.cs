@@ -33,87 +33,18 @@ public class GameData : MonoBehaviour
         public BodyPartType bodyPartType;
         public SkinSO skinSO;
 
-        public SkinSO.SetSkin GetSetSkin(int setskin)
+        public void SetSkin(Character character, int skinIndex )
         {
-            int hatsIndex = setskin;
-            ESetSkin setSkinType = (ESetSkin)setskin;
-
-            foreach (var set in skinSO.sets)
+            FullSetItem existingSet = character.GetComponentInChildren<FullSetItem>();
+            if (existingSet != null)
             {
-                if (set.setSkinType == setSkinType)
-                {
-                    return set;
-                }
+                Destroy(existingSet.gameObject);
             }
-            return null; // set mặc định nếu không tìm thấy
-        }
 
-        public void SetSkinForPlayer(int setskin, Renderer body, Renderer pants, Transform hatPos, Transform tailPos, Transform wingPos, Transform otherPos)
-        {
-            var setSkin = GetSetSkin(setskin);
-            if (setSkin != null)
+            if (skinIndex >= 0 && skinIndex < skinSO.sets.Count)
             {
-                // Set color
-                if (setSkin.color != null)
-                {
-                    Material[] newMaterials = new Material[body.materials.Length];
-                    for (int i = 0; i < newMaterials.Length; i++)
-                    {
-                        newMaterials[i] = setSkin.color;
-                    }
-                    body.materials = newMaterials;
-                }
-
-                // Set pant
-                if (setSkin.pant != null)
-                {
-                    Material[] newMaterials = new Material[pants.materials.Length];
-                    for (int i = 0; i < newMaterials.Length; i++)
-                    {
-                        newMaterials[i] = setSkin.pant;
-                    }
-                    pants.materials = newMaterials;
-                }
-
-                // Set hat
-                if (setSkin.hat != null)
-                {
-                    foreach (Transform child in hatPos)
-                    {
-                        Destroy(child.gameObject);
-                    }
-                    Instantiate(setSkin.hat, hatPos);
-                }
-
-                // Set tail
-                if (setSkin.tail != null)
-                {
-                    foreach (Transform child in tailPos)
-                    {
-                        Destroy(child.gameObject);
-                    }
-                    Instantiate(setSkin.tail, tailPos);
-                }
-
-                // Set wing
-                if (setSkin.wing != null)
-                {
-                    foreach (Transform child in wingPos)
-                    {
-                        Destroy(child.gameObject);
-                    }
-                    Instantiate(setSkin.wing, wingPos);
-                }
-
-                // Set other
-                if (setSkin.other != null)
-                {
-                    foreach (Transform child in otherPos)
-                    {
-                        Destroy(child.gameObject);
-                    }
-                    Instantiate(setSkin.other, otherPos);
-                }
+                FullSetItem newSet = Instantiate(skinSO.sets[skinIndex], character.transform);
+                character.fullSetItem = newSet;
             }
         }
     }
@@ -179,7 +110,6 @@ public class GameData : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
-            // Instantiate and attach the new hat
             Instantiate(newHat, pos);
         }
     }
@@ -202,7 +132,6 @@ public class GameData : MonoBehaviour
                 Destroy(child.gameObject);
             }
 
-            // Instantiate and attach the new hat
             Instantiate(newShield, pos);
         }
     }
@@ -248,7 +177,6 @@ public class GameData : MonoBehaviour
     private void Awake()
     {
         GameData.ins = this;
-        num = weaponData.RandomWPNumber();
     }
 
     public void RandomSkinForBots(Renderer body, Renderer pants, Transform pos)
@@ -258,14 +186,14 @@ public class GameData : MonoBehaviour
         hatsData.SetHats(Random.Range(0, System.Enum.GetValues(typeof(EHats)).Length), pos);
     }
 
-    public GameObject RandomModelWeapon(Transform pos)
+    public GameObject RandomModelWeapon(int number,Transform pos)
     {
-        return weaponData.SetWeaponsModelForBots(num, pos);
+        return weaponData.SetWeaponsModelForBots(number, pos);
     }
 
-    public Weapon RandomWeapon()
+    public Weapon RandomWeapon(int number)
     {
-        return weaponData.SetWeapons(num);
+        return weaponData.SetWeapons(number);
     }
     #endregion
 
@@ -295,9 +223,10 @@ public class GameData : MonoBehaviour
         shieldData.SetShield(shieldNum, pos);
     }
 
-    public void SetSkinForPlayer(int setSkinNum, Renderer body, Renderer pants, Transform hatPos, Transform tailPos, Transform wingPos, Transform otherPos)
+
+    public void SetSkin(Character character, int skinIndex)
     {
-        skinData.SetSkinForPlayer(setSkinNum, body, pants, hatPos, tailPos, wingPos, otherPos);
+        skinData.SetSkin(character, skinIndex);
     }
     #endregion
 }

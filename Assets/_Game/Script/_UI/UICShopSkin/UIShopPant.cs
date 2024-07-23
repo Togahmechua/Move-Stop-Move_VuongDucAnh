@@ -63,16 +63,16 @@ public class UIShopPant : MonoBehaviour
         switch (DataConfig.eskinType)
         {
             case EskinType.Hat:
-                GameData.Ins.SetHatForPlayer(id, player.hatPos);
+                GameData.Ins.SetHatForPlayer(id, player.fullSetItem.hatPos);
                 break;
             case EskinType.Pant:
-                GameData.Ins.SetPantForPlayer(id, player.pants);
+                GameData.Ins.SetPantForPlayer(id, player.fullSetItem.PantRenderer);
                 break;
             case EskinType.Shield:
-                GameData.Ins.SetShieldForPlayer(id, player.shieldPos);
+                GameData.Ins.SetShieldForPlayer(id, player.fullSetItem.shieldPos);
                 break;
             case EskinType.Skin:
-                GameData.Ins.SetSkinForPlayer(id, player.body, player.pants, player.hatPos, player.wingPos, player.tailPos, player.shieldPos);
+                // GameData.Ins.SetSkinForPlayer(id, player.body, player.pants, player.hatPos, player.wingPos, player.tailPos, player.shieldPos);
                 break;
         }
     }

@@ -6,19 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkinSO", menuName = "ScriptableObjects/SkinSO", order = 1)]
 public class SkinSO : ScriptableObject
 {
-    [Serializable]
-    public class SetSkin
-    {
-        public ESetSkin setSkinType;
-        public GameObject hat;
-        public GameObject other;
-        public GameObject tail;
-        public GameObject wing;
-        public Material pant;
-        public Material color;
-    }
-
-    public List<SetSkin> sets;
+    public List<FullSetItem> sets;
 }
 
 

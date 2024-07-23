@@ -10,23 +10,14 @@ public class Character : GameUnit
     public GameObject target;
     public AttackRange attackRange;
     public bool isded;
-    public Renderer pants;
-    public Transform hatPos;
-    public Transform shieldPos;
-    public Renderer body;
-    public Transform tailPos;
-    public Transform wingPos;
+    public FullSetItem fullSetItem;
 
-    [SerializeField] private Animator anim;
     [SerializeField] protected float shootDelay;
     [SerializeField] private Transform shootPos;
     [SerializeField] protected GameObject weaponModel;
     [SerializeField] protected Weapon wp;
     [SerializeField] protected float distance;
     [SerializeField] private Transform model;
-    [SerializeField] protected Transform wpPos;
-
-
 
     protected bool isChecked;
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
@@ -35,6 +26,11 @@ public class Character : GameUnit
 
     private string animName;
     
+
+    private void Awake()
+    {
+        
+    }
 
     public virtual void Die()
     {
@@ -51,9 +47,9 @@ public class Character : GameUnit
     {
         if (this.animName != animName)
         {
-            anim.ResetTrigger(this.animName);
+            fullSetItem.anim.ResetTrigger(this.animName);
             this.animName = animName;
-            anim.SetTrigger(this.animName);
+            fullSetItem.anim.SetTrigger(this.animName);
         }
     }
 
