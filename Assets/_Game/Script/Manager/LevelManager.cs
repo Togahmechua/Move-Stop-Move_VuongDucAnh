@@ -1,4 +1,4 @@
-using System.Collections;
+        using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
     public Button starButton;
     public bool isStart;
     public int currentLevel;
+    public GameObject loseCanvas;
+    public GameObject gameplayCanvas;
 
     [SerializeField] private List<Level> levelList = new List<Level>();
     public Level currentLevelInstance;
@@ -34,17 +36,28 @@ public class LevelManager : MonoBehaviour
         isStart = true;
     }
 
-    public void StartLevel(int levelIndex)
+    public void DespawnAllBot()
     {
-        // Clear and despawn previous level's bots if any
         if (currentLevelInstance != null)
         {
             foreach (var bot in currentLevelInstance.spawnedBots)
             {
-                SimplePool.Despawn(bot);  // Despawn bots using the pool system
+                SimplePool.Despawn(bot);
             }
-            currentLevelInstance.spawnedBots.Clear();  // Clear the list
-            Destroy(currentLevelInstance.gameObject); // Destroy the level object
+            currentLevelInstance.spawnedBots.Clear();
+        }
+    }
+
+    public void StartLevel(int levelIndex)
+    {
+        if (currentLevelInstance != null)
+        {
+            foreach (var bot in currentLevelInstance.spawnedBots)
+            {
+                SimplePool.Despawn(bot);
+            }
+            currentLevelInstance.spawnedBots.Clear();
+            Destroy(currentLevelInstance.gameObject);
         }
 
         // Instantiate new level

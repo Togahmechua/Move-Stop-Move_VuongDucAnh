@@ -55,7 +55,7 @@ public class Weapon : GameUnit
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
-        if (character != null && character != Owner)
+        if (character != null && character != Owner && character is not Player)
         {
             if (Owner != null)
             {
@@ -65,5 +65,10 @@ public class Weapon : GameUnit
             SimplePool.Despawn(this);
             character.isded = true;
         }
+        else if (character != null && character != Owner && character is Player)
+        {
+            character.isded = true;
+        }
+
     }
 }

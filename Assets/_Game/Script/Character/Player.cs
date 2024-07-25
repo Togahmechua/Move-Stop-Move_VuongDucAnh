@@ -25,18 +25,13 @@ public class Player : Character
 
     public void OnInit()
     {
-        Debug.Log("OnInit called");
-        if (LevelManager.Ins.currentLevelInstance.playerPos != null)
-        {
-            transform.position = LevelManager.Ins.currentLevelInstance.playerPos.position;
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 185f, 0f));
-            Debug.Log("Position set to initial position: " + LevelManager.Ins.currentLevelInstance.playerPos.position);
-        }
-        else
-        {
-            Debug.LogWarning("Initial position is not set");
-        }
-        fullSetItem.gameObject.transform.localScale = Vector3.one;
+        rb.velocity = Vector3.zero;
+        ChangeAnim(Constants.ANIM_IDLE);
+        isDancing = false;
+        isChecked = false;
+        timeToShoot = 0f;
+
+        attackRange.characterList.Clear();
     }
 
     private void EquipWeapon(int weaponId)
@@ -93,8 +88,7 @@ public class Player : Character
     {
         if (isded)
         {
-            Die();
-            gameObject.SetActive(false);
+            StartCoroutine(Ded());
             return;
         }
 
@@ -172,10 +166,20 @@ public class Player : Character
         }
     }
 
-    public override void Die()
+    public IEnumerator Ded()
     {
-        base.Die();
         ChangeAnim(Constants.ANIM_Dead);
+        LevelManager.Ins.loseCanvas.SetActive(true);
+        LevelManager.Ins.DespawnAllBot();
+        joyStick.HandleRange = 0;
+        RectTransform handleRect = joyStick.transform.GetChild(0).GetComponent<RectTransform>();
+        if (handleRect != null)
+        {
+            handleRect.anchoredPosition = Vector2.zero;
+        }
+
+        yield return new WaitForSeconds(0.2f);
+        LevelManager.Ins.gameplayCanvas.SetActive(false);
     }
 
     public void ChangeWeapon(int num)
@@ -183,5 +187,12 @@ public class Player : Character
         currentNum = num;
         PlayerPrefs.SetInt("PWeapon", currentNum);
         EquipWeapon(currentNum);
+    }
+
+    public void SetActivePlayer()
+    {
+        isded = false;
+        gameObject.SetActive(true);
+        OnInit();
     }
 }

@@ -25,7 +25,7 @@ public class Character : GameUnit
     protected float timeToShoot; 
 
     private string animName;
-    
+
     public virtual void Die()
     {
         OnCharacterDeath?.Invoke(this);
@@ -34,7 +34,7 @@ public class Character : GameUnit
 
     protected virtual void Move()
     {
-        //For override
+        // For override
     }
 
     public virtual void ChangeAnim(string animName)

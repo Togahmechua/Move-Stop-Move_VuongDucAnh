@@ -15,7 +15,7 @@ public class Level : MonoBehaviour
     public List<BotCtrl> spawnedBots = new List<BotCtrl>(); 
 
     private bool canSpawnMoreBots;
-    private bool isSetPos;
+    public bool isSetPos;
 
     public Player player;
 
@@ -30,6 +30,7 @@ public class Level : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, playerPos.position) >= 0.1f && isSetPos == false)
         {
+            // Debug.Log("A");
             SetPlayerPosition();
             isSetPos = true;
         }
