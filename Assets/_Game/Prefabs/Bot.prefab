@@ -75,6 +75,7 @@ MonoBehaviour:
   hatPos: {fileID: 4514025988795435645}
   shieldPos: {fileID: 8257677747495191158}
   body: {fileID: 4119049777007199167}
+  anim: {fileID: 5308801987681615406}
 --- !u!1 &253976724397029097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1001,7 @@ GameObject:
   - component: {fileID: 6431562604008216344}
   - component: {fileID: 5817842040147711665}
   - component: {fileID: 4017962414848662064}
+  - component: {fileID: -7762121946386260941}
   m_Layer: 7
   m_Name: Bot
   m_TagString: Untagged
@@ -1145,7 +1147,6 @@ MonoBehaviour:
   attackRange: {fileID: 2387066851308522596}
   isded: 0
   fullSetItem: {fileID: 2845708720637572325}
-  anim: {fileID: 5308801987681615406}
   shootDelay: 1
   shootPos: {fileID: 4234989158065662848}
   weaponModel: {fileID: 0}
@@ -1179,6 +1180,23 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7762121946386260941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884420855353154520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColor: {r: 1, g: 0, b: 0, a: 1}
+  needBoxIndicator: 0
+  needArrowIndicator: 1
+  needDistanceText: 0
+  indicator: {fileID: 0}
 --- !u!1 &2919116751673878367
 GameObject:
   m_ObjectHideFlags: 0

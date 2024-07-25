@@ -10,5 +10,4 @@ public class FullSetItem : GameUnit
     public Transform shieldPos;
     public Renderer body;
     public Animator anim;
-
 }

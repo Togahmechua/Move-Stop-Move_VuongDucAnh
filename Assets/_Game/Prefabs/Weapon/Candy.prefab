@@ -170,7 +170,7 @@ MonoBehaviour:
   poolType: 3
   moveSpeed: 8
   direction: {x: 0, y: 0, z: 1}
-  timeToDestroy: 2
+  timeToDestroy: 1
   isDestroy: 0
 --- !u!1 &6326787397673724330
 GameObject:

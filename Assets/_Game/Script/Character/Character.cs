@@ -17,7 +17,7 @@ public class Character : GameUnit
     [SerializeField] protected GameObject weaponModel;
     [SerializeField] protected Weapon wp;
     [SerializeField] protected float distance;
-    [SerializeField] private Transform model;
+    public Transform model;
 
     protected bool isChecked;
     protected bool isAttacking; // Biến trạng thái cho animation tấn công
@@ -26,16 +26,10 @@ public class Character : GameUnit
 
     private string animName;
     
-
-    private void Awake()
-    {
-        
-    }
-
     public virtual void Die()
     {
         OnCharacterDeath?.Invoke(this);
-        LevelManager.Ins.count--;
+        LevelManager.Ins.DecreaseBotCount();
     }
 
     protected virtual void Move()

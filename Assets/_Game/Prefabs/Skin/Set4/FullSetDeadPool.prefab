@@ -869,6 +869,37 @@ Transform:
   - {fileID: 1705460608528027956}
   m_Father: {fileID: 6084443833104215470}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4308881601790597440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4218215088167840997}
+  m_Layer: 0
+  m_Name: ShieldPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4218215088167840997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308881601790597440}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.04297305, y: -0.07723608, z: -0.57629764, w: 0.8124463}
+  m_LocalPosition: {x: 0.17000021, y: 0.4300003, z: -0.010000142}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2454669071067608348}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4329134781207464904
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,9 +1397,9 @@ MonoBehaviour:
   poolType: 0
   TfWeaponHolder: {fileID: 1650725348488919310}
   PantRenderer: {fileID: 8865099373015777633}
-  hatPos: {fileID: 0}
-  shieldPos: {fileID: 0}
-  body: {fileID: 0}
+  hatPos: {fileID: 331274560960911734}
+  shieldPos: {fileID: 4218215088167840997}
+  body: {fileID: 1536898080249952734}
   anim: {fileID: 8572343048637605640}
 --- !u!1 &5282809876728168157
 GameObject:
@@ -2399,6 +2430,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8896288633967856263}
+  - {fileID: 4218215088167840997}
   m_Father: {fileID: 295451826841255675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9217678185500970009

@@ -44,6 +44,7 @@ public class GameData : MonoBehaviour
             if (skinIndex >= 0 && skinIndex < skinSO.sets.Count)
             {
                 FullSetItem newSet = Instantiate(skinSO.sets[skinIndex], character.transform);
+                character.model =  newSet.transform;
                 character.fullSetItem = newSet;
             }
         }

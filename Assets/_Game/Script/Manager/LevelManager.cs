@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -9,57 +9,80 @@ public class LevelManager : MonoBehaviour
     private static LevelManager ins;
     public static LevelManager Ins => ins;
 
-    public int count = 0;
+    public TextMeshProUGUI text;
     public Player player;
     public Button starButton;
-    
-    [SerializeField] private List<Transform> spawnList;
-    [SerializeField] private BotCtrl botPrefab;
-    
+    public bool isStart;
+    public int currentLevel;
+
+    [SerializeField] private List<Level> levelList = new List<Level>();
+    public Level currentLevelInstance;
 
     private void Awake()
     {
         LevelManager.ins = this;
-        Spawn(0);
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
     }
 
-
-    private void Update()
+    private void Start()
     {
-        if (count < 5)
-        {
-            Spawn(1);
-        }
-
-        if (count <= 0)
-        {
-            count = 0;
-        }
+        StartLevel(currentLevel);
     }
 
-    public void Spawn(int num)
+    public void StartGame()
     {
-        switch (num)
+        isStart = true;
+    }
+
+    public void StartLevel(int levelIndex)
+    {
+        // Clear and despawn previous level's bots if any
+        if (currentLevelInstance != null)
         {
-            case (int)ESpawn.Spawn0 :
-                for (int i = 0 ; i < 5; i++)
-                {
-                    BotCtrl bot1 = SimplePool.Spawn<BotCtrl>(botPrefab, spawnList[i].position, spawnList[i].rotation);
-                    count++;
-                }
-            break;
+            foreach (var bot in currentLevelInstance.spawnedBots)
+            {
+                SimplePool.Despawn(bot);  // Despawn bots using the pool system
+            }
+            currentLevelInstance.spawnedBots.Clear();  // Clear the list
+            Destroy(currentLevelInstance.gameObject); // Destroy the level object
+        }
 
-            case (int)ESpawn.Spawn1 :
-                BotCtrl bot = SimplePool.Spawn<BotCtrl>(botPrefab, spawnList[Random.Range(0,spawnList.Count)].position, spawnList[Random.Range(0,spawnList.Count)].rotation);
-                count++;
-            break;
+        // Instantiate new level
+        currentLevelInstance = Instantiate(levelList[levelIndex], transform);
+        currentLevelInstance.Initialize(currentLevelInstance.spawnList, currentLevelInstance.botPrefab);
+        UpdateText();
+    }
 
+    public void UpdateText()
+    {
+        if (currentLevelInstance != null)
+        {
+            text.text = "Alive: " + currentLevelInstance.GetRemainingBotCount();
         }
     }
-}
 
-public enum ESpawn
-{
-    Spawn0 = 0,
-    Spawn1 = 1
+    public void DecreaseBotCount()
+    {
+        if (currentLevelInstance != null)
+        {
+            currentLevelInstance.DecreaseBotCount();
+            UpdateText();
+        }
+    }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Continue()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void BackToMenu()
+    {
+        StartLevel(currentLevel);
+        isStart = false;
+    }
 }

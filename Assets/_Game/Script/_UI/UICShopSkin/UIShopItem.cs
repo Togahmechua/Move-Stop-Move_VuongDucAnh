@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class UIShopItem : MonoBehaviour
     public GameObject equippedText;
     public int id;
     public bool isEquip { get; private set; }
-    public bool IsBought => isBought; // Added to expose isBought property
+    public bool IsBought => isBought; // Expose isBought property
 
     void Start()
     {
@@ -28,8 +29,13 @@ public class UIShopItem : MonoBehaviour
         DataConfig = shopItemDataConfig;
         id = DataConfig.ID;
         ImgIcon.sprite = DataConfig.spriteIcon;
+
+        // Load purchase and equip status
+        isBought = PlayerPrefs.GetInt("ItemBought_" + id, 0) == 1;
         GoLock.SetActive(!isBought);
-        equippedText.SetActive(false);
+
+        isEquip = PlayerPrefs.GetInt("ItemEquipped_" + id, 0) == 1;
+        equippedText.SetActive(isEquip);
     }
 
     private void OnClickSelectItem()
@@ -50,12 +56,20 @@ public class UIShopItem : MonoBehaviour
     {
         isBought = true;
         GoLock.SetActive(false);
+        
+        // Save item purchase status
+        PlayerPrefs.SetInt("ItemBought_" + id, 1);
+        PlayerPrefs.Save();
     }
 
     public void SetEquip(bool equip)
     {
         isEquip = equip;
         equippedText.SetActive(equip);
+        
+        // Save item equip status
+        PlayerPrefs.SetInt("ItemEquipped_" + id, equip ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     private void EquipItemToPlayer()
@@ -66,15 +80,19 @@ public class UIShopItem : MonoBehaviour
                 GameData.Ins.SetHatForPlayer(id, player.fullSetItem.hatPos);
                 break;
             case EskinType.Pant:
-                GameData.Ins.SetPantForPlayer(id, player.fullSetItem.PantRenderer);
+                GameData.Ins.SetPantForPlayer(id - 10, player.fullSetItem.PantRenderer);
                 break;
             case EskinType.Shield:
-                GameData.Ins.SetShieldForPlayer(id, player.fullSetItem.shieldPos);
+                GameData.Ins.SetShieldForPlayer(id - 20, player.fullSetItem.shieldPos);
                 break;
-            case EskinType.Skin:
-                player.PlayerSetSkin(id);
+            case EskinType.SkinSet:
+                player.PlayerSetSkin(id - 30);
                 break;
         }
+        
+        // Save the current skin
+        PlayerPrefs.SetInt("PlayerSkin", id);
+        PlayerPrefs.Save();
     }
 
     private void BuffForPlayer()
@@ -82,19 +100,14 @@ public class UIShopItem : MonoBehaviour
         switch (DataConfig.eBuffType)
         {
             case EBuffType.None:
-                
                 break;
             case EBuffType.AttackRange:
-                
                 break;
             case EBuffType.MoveSpeed:
-                
                 break;
             case EBuffType.Gold:
-                
                 break;
             case EBuffType.AttackSpeed:
-                
                 break;
         }
     }

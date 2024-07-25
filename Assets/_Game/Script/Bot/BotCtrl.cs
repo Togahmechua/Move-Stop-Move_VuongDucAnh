@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class BotCtrl : Character
@@ -14,7 +12,6 @@ public class BotCtrl : Character
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rangeToMove;
     [SerializeField] private Vector3 _destinationPosition;
-
 
     public IState<BotCtrl> currentState;
     public StartState startState;
@@ -26,7 +23,7 @@ public class BotCtrl : Character
 
     private void Start()
     {
-        int rand = Random.Range(0,2);
+        int rand = Random.Range(0, 2);
         if (rand == 0)
         {
             GameData.Ins.RandomSkinForBots(fullSetItem.body, fullSetItem.PantRenderer, fullSetItem.hatPos);
@@ -38,17 +35,24 @@ public class BotCtrl : Character
         int num = Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
         weaponModel = GameData.Ins.RandomModelWeapon(num, fullSetItem.TfWeaponHolder);
         wp = GameData.Ins.RandomWeapon(num);
-        
-        // Initialize states
 
+        // Initialize states
         startState = new StartState();
         idleState = new IdleState();
         attackState = new AttackState();
         moveState = new MoveState();
         dieState = new DieState();
-        //Start in Idle state
-        TransitionToState(startState);
-        LevelManager.Ins.starButton.onClick.AddListener(TransToIdleState);
+
+        // Start in Start state
+        if (!LevelManager.Ins.isStart)
+        {
+            TransitionToState(startState);
+            LevelManager.Ins.starButton.onClick.AddListener(TransToIdleState);
+        }
+        else
+        {
+            TransitionToState(idleState);
+        }
     }
 
     private void TransToIdleState()
@@ -60,7 +64,7 @@ public class BotCtrl : Character
     {
         currentState?.OnExecute(this);
 
-        if (isded == true)
+        if (isded)
         {
             TransitionToState(dieState);
         }
@@ -81,28 +85,27 @@ public class BotCtrl : Character
                 Vector3 targetPos = RandomPoint();
                 agent.SetDestination(targetPos);
                 break;
-                // case (int)Chase.Chase1:
-                //     break;
-                // case (int)Chase.Chase2:
-                //     break;
+            // case (int)Chase.Chase1:
+            //     break;
+            // case (int)Chase.Chase2:
+            //     break;
         }
     }
 
     public override void Die()
     {
-        base.Die();    
+        base.Die();
         agent.speed = 0;
         ChangeAnim(Constants.ANIM_Dead);
         canShoot = false;
-       
-        Invoke(nameof(DespawnBots),1f);
+
+        Invoke(nameof(DespawnBots), 1f);
     }
 
     private void DespawnBots()
-    {     
+    {
         SimplePool.Despawn(this);
     }
-
 
     public override void Shoot()
     {
@@ -120,7 +123,10 @@ public class BotCtrl : Character
 
     public void Wait(UnityAction callBack, float time)
     {
-        StartCoroutine(IEWait(callBack, time));
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(IEWait(callBack, time));
+        }
     }
 
     private IEnumerator IEWait(UnityAction callBack, float time)

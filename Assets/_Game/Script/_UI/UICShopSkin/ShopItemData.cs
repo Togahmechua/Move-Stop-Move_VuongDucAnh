@@ -15,8 +15,8 @@ public class ShopItemDataConfig {
     public Sprite spriteIcon;
     public float Price;
     public bool isLock = true;
-    public bool isEquip = false;
-    public bool isUnequip = false;
+    public bool isEquip;
+    public bool isUnequip;
     public EskinType eskinType;
     public EBuffType eBuffType;
 }
@@ -26,7 +26,7 @@ public enum EskinType
     Hat,
     Pant,
     Shield,
-    Skin
+    SkinSet
 }
 
 public enum EBuffType

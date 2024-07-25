@@ -16,7 +16,6 @@ public class MoveToPlayer : MonoBehaviour
     private bool isActiveShop;
 
     private Vector3 offset;
-    
 
     protected virtual void Awake()
     {
@@ -56,7 +55,7 @@ public class MoveToPlayer : MonoBehaviour
             {
                 player.isDancing = true;
                 player.ChangeAnim(Constants.ANIM_Dance);
-                // Di chuyển camera đến vị trí startPos
+                // Di chuyển camera đến vị trí shopPos
                 transform.position = Vector3.MoveTowards(transform.position, shopPos, speed * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(new Vector3(10f, 0f, 0f));
                 Wait(() => isActiveShop = false);
@@ -113,4 +112,15 @@ public class MoveToPlayer : MonoBehaviour
         animator.enabled = false;
     }
 
+    // New method to teleport and animate
+    public void TeleportAndAnimateToStartPos()
+    {
+        StopAllCoroutines();
+        // Teleport camera to startPos instantly
+        transform.position = startPos;
+        transform.rotation = Quaternion.Euler(new Vector3(10f, 0f, 0f));
+
+        animator.enabled = true;  
+        animator.Play("CameraAnim"); 
+    }
 }

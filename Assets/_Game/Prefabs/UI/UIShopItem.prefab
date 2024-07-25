@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BtnSelect: {fileID: 691908552024882263}
+  BtnBuy: {fileID: 0}
   ImgIcon: {fileID: 5972438602598283475}
   GoLock: {fileID: 3602643913122382335}
   equippedText: {fileID: 607965447555221401}

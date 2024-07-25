@@ -488,9 +488,9 @@ MonoBehaviour:
   poolType: 0
   TfWeaponHolder: {fileID: 2225206655551432937}
   PantRenderer: {fileID: 7936020528283317202}
-  hatPos: {fileID: 0}
-  shieldPos: {fileID: 0}
-  body: {fileID: 0}
+  hatPos: {fileID: 8917739135250782753}
+  shieldPos: {fileID: 7010054220514687746}
+  body: {fileID: 6617148931530412214}
   anim: {fileID: 8534543112142982324}
 --- !u!1 &2242125725052726577
 GameObject:

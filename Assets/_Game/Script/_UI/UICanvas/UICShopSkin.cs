@@ -20,6 +20,7 @@ public class UICShopSkin : UICanvas
     [SerializeField] private TextMeshProUGUI money;
 
     private int selectedItemID;
+    private int previouslyEquippedItemID;
     private UIShopItem selectedItemUI;
     private UIShopItem equippedItemUI;
 
@@ -35,13 +36,17 @@ public class UICShopSkin : UICanvas
         unEquippedButton.onClick.AddListener(UnequipSkin);
         XButton.onClick.AddListener(OnXButtonClick);
         InitializeShopItems();
+
+        // Load equipped item ID
+        previouslyEquippedItemID = PlayerPrefs.GetInt("PlayerSkin", 0);
+        EquipPreviouslyEquippedItem();
     }
 
     private void InitializeShopItems()
     {
         foreach (Transform child in pos)
         {
-            Destroy(child.gameObject); // Clear previous items
+            Destroy(child.gameObject);
         }
 
         for (int i = 0; i < shopItemDataSO.dataConfigs.Count; i++)
@@ -58,7 +63,7 @@ public class UICShopSkin : UICanvas
             equippedItemUI.SetEquip(false);
             equippedItemUI = null;
         }
-        // GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
+        LevelManager.Ins.player.PlayerSetSkin(0);
         equippedButton.gameObject.SetActive(true);
         unEquippedButton.gameObject.SetActive(false);
     }
@@ -97,13 +102,13 @@ public class UICShopSkin : UICanvas
 
     private void Check()
     {
-        // Logic to check if the item can be bought
         lockButton.gameObject.SetActive(false);
         equippedButton.gameObject.SetActive(true);
 
         if (selectedItemUI != null)
         {
             selectedItemUI.SetBought();
+            EquipItem();
         }
     }
 
@@ -118,6 +123,10 @@ public class UICShopSkin : UICanvas
 
             equippedItemUI = selectedItemUI;
             selectedItemUI.SetEquip(true);
+
+            previouslyEquippedItemID = selectedItemID; // Store the ID of the equipped item
+            PlayerPrefs.SetInt("PlayerSkin", previouslyEquippedItemID); // Save the equipped item ID
+            PlayerPrefs.Save(); // Ensure the data is saved
 
             equippedButton.gameObject.SetActive(false);
             unEquippedButton.gameObject.SetActive(true);
@@ -139,7 +148,14 @@ public class UICShopSkin : UICanvas
 
         if (!anyItemEquipped)
         {
-            // GameData.Ins.SetSkinForPlayer(0 , LevelManager.Ins.player.body, LevelManager.Ins.player.pants, LevelManager.Ins.player.hatPos, LevelManager.Ins.player.wingPos, LevelManager.Ins.player.tailPos, LevelManager.Ins.player.shieldPos);
+            if (selectedItemID != previouslyEquippedItemID)
+            {
+                LevelManager.Ins.player.PlayerSetSkin(previouslyEquippedItemID); // Re-equip the previously equipped item
+            }
+            else
+            {
+                LevelManager.Ins.player.PlayerSetSkin(selectedItemID); // Re-equip the selected item
+            }
         }
 
         equippedButton.gameObject.SetActive(false);
@@ -157,5 +173,32 @@ public class UICShopSkin : UICanvas
             }
         }
         return null;
+    }
+
+    private void EquipPreviouslyEquippedItem()
+    {
+        if (previouslyEquippedItemID > 0 && previouslyEquippedItemID < 10)
+        {
+            LevelManager.Ins.player.PlayerSetHat(previouslyEquippedItemID);
+        }
+        else if (previouslyEquippedItemID >= 10 && previouslyEquippedItemID < 20)
+        {
+            LevelManager.Ins.player.PlayerSetPant(previouslyEquippedItemID - 10);
+        }
+        else if (previouslyEquippedItemID >= 20 && previouslyEquippedItemID < 30)
+        {
+            LevelManager.Ins.player.PlayerSetShield(previouslyEquippedItemID - 20);
+        }
+        else if (previouslyEquippedItemID >= 30 && previouslyEquippedItemID < 40)
+        {
+            LevelManager.Ins.player.PlayerSetSkin(previouslyEquippedItemID - 30);
+        }
+
+        UIShopItem previouslyEquippedItemUI = FindUIShopItemById(previouslyEquippedItemID);
+        if (previouslyEquippedItemUI != null)
+        {
+            previouslyEquippedItemUI.SetEquip(true);
+            equippedItemUI = previouslyEquippedItemUI;
+        }
     }
 }

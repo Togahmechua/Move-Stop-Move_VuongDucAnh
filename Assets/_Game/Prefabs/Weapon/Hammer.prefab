@@ -215,5 +215,5 @@ MonoBehaviour:
   poolType: 2
   moveSpeed: 8
   direction: {x: 0, y: 0, z: 1}
-  timeToDestroy: 2
+  timeToDestroy: 1
   isDestroy: 0
