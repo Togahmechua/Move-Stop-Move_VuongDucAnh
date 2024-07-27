@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,7 +6,6 @@ using UnityEngine.UI;
 public class UIShopItem : MonoBehaviour
 {
     private ShopItemDataConfig DataConfig;
-    private bool isBought;
     private Player player;
 
     public Button BtnSelect;
@@ -17,12 +15,21 @@ public class UIShopItem : MonoBehaviour
     public GameObject equippedText;
     public int id;
     public bool isEquip { get; private set; }
-    public bool IsBought => isBought;
+    public bool IsBought => DataConfig != null && DataConfig.isBought;
+
+    private static UIShopItem currentlySelectedItem;
+    private List<int> intList = new List<int>(); // List to keep track of equipped item IDs
+
     void Start()
     {
+        player = GameObject.Find("Player").GetComponent<Player>(); 
         BtnSelect.onClick.AddListener(OnClickSelectItem);
-        // player = GameObject.Find("Player").GetComponent<Player>();
         OnInit();
+    }
+
+    public void Update()
+    {
+        UpdateItemState();
     }
 
     public void OnInit()
@@ -32,83 +39,113 @@ public class UIShopItem : MonoBehaviour
         equippedText.SetActive(false);
     }
 
-    public void Setup(ShopItemDataConfig shopItemDataConfig) 
+    public void OnClick()
+    {
+        TouchScreenSpr.gameObject.SetActive(true);
+        GoLock.SetActive(true);
+        equippedText.SetActive(false);
+    }
+
+    public void Setup(ShopItemDataConfig shopItemDataConfig)
     {
         DataConfig = shopItemDataConfig;
         id = DataConfig.ID;
+        Debug.Log($"Setting up item with ID: {id}");
         ImgIcon.sprite = DataConfig.spriteIcon;
     }
 
     private void OnClickSelectItem()
     {
-        if (!isBought)
+        Debug.Log($"Selected item with ID: {id}");
+        if (currentlySelectedItem != null && currentlySelectedItem != this)
         {
-            // UICShopSkin.Ins.ShowItemInfo(id);
-            // EquipItemToPlayer();
+            currentlySelectedItem.OnInit();
         }
-        else
+        currentlySelectedItem = this;
+        UICShopSkin.Ins.ShowItemInfo(id);
+        OnClick();
+        EquipItemToPlayer();
+    }
+
+    public void UpdateItemState()
+    {
+        if (DataConfig != null)
         {
-            // UICShopSkin.Ins.ShowBoughtItemInfo(id);
-            // EquipItemToPlayer();
+            if (DataConfig.isEquip)
+            {
+                GoLock.SetActive(false);
+                equippedText.SetActive(true);
+            }
+            else if (DataConfig.isBought)
+            {
+                GoLock.SetActive(false);
+                equippedText.SetActive(false);
+            }
+            else
+            {
+                GoLock.SetActive(true);
+                equippedText.SetActive(false);
+            }
         }
     }
 
-    // public void SetBought()
-    // {
-    //     isBought = true;
-    //     GoLock.SetActive(false);
-        
-    //     // Save item purchase status
-    //     PlayerPrefs.SetInt("ItemBought_" + id, 1);
-    //     PlayerPrefs.Save();
-    // }
+    public void SetDefaultSkin()
+    {
+        switch (DataConfig.eskinType)
+        {
+            case EskinType.Hat:
+                GameData.Ins.SetHatForPlayer(10, player.fullSetItem.hatPos);
+                break;
+            case EskinType.Pant:
+                GameData.Ins.SetPantForPlayer(10, player.fullSetItem.PantRenderer);
+                break;
+            case EskinType.Shield:
+                GameData.Ins.SetShieldForPlayer(0, player.fullSetItem.shieldPos);
+                break;
+            case EskinType.SkinSet:
+                player.PlayerSetSkin(0);
+                break;
+        }
+    }
 
-    // public void SetEquip(bool equip)
-    // {
-    //     isEquip = equip;
-    //     equippedText.SetActive(equip);
-        
-    //     // Save item equip status
-    //     PlayerPrefs.SetInt("ItemEquipped_" + id, equip ? 1 : 0);
-    //     PlayerPrefs.Save();
-    // }
+    private void EquipItemToPlayer()
+    {
+        if (DataConfig != null)
+        {
+            intList.Add(id); // Track the currently equipped item ID
 
-    // private void EquipItemToPlayer()
-    // {
-    //     switch (DataConfig.eskinType)
-    //     {
-    //         case EskinType.Hat:
-    //             GameData.Ins.SetHatForPlayer(id, player.fullSetItem.hatPos);
-    //             break;
-    //         case EskinType.Pant:
-    //             GameData.Ins.SetPantForPlayer(id - 10, player.fullSetItem.PantRenderer);
-    //             break;
-    //         case EskinType.Shield:
-    //             GameData.Ins.SetShieldForPlayer(id - 20, player.fullSetItem.shieldPos);
-    //             break;
-    //         case EskinType.SkinSet:
-    //             player.PlayerSetSkin(id - 30);
-    //             break;
-    //     }
-        
-    //     // Save the current skin
-    //     PlayerPrefs.SetInt("PlayerSkin", id);
-    //     PlayerPrefs.Save();
-    // }
+            switch (DataConfig.eskinType)
+            {
+                case EskinType.Hat:
+                    GameData.Ins.SetHatForPlayer(id, player.fullSetItem.hatPos);
+                    break;
+                case EskinType.Pant:
+                    GameData.Ins.SetPantForPlayer(id - 10, player.fullSetItem.PantRenderer);
+                    break;
+                case EskinType.Shield:
+                    GameData.Ins.SetShieldForPlayer(id - 20, player.fullSetItem.shieldPos);
+                    break;
+                case EskinType.SkinSet:
+                    player.PlayerSetSkin(id - 30);
+                    break;
+            }
+        }
+    }
 
-    private void BuffForPlayer()
+    public void EquipBuff()
     {
         switch (DataConfig.eBuffType)
         {
-            case EBuffType.None:
-                break;
             case EBuffType.AttackRange:
+                // Implement buff logic
                 break;
             case EBuffType.MoveSpeed:
+                // Implement buff logic
                 break;
             case EBuffType.Gold:
+                // Implement buff logic
                 break;
-            case EBuffType.AttackSpeed:
+            default: 
                 break;
         }
     }

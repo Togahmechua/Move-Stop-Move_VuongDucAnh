@@ -10,21 +10,21 @@ public class CoinManager : MonoBehaviour
 
     private void Start()
     {
-        coin = PlayerPrefs.GetInt("Money", 0);
+        // coin = PlayerPrefs.GetInt("Money", 0);
         UpdateText();
     }
 
     public void IncreaseMoney(int amount)
     {
         coin += amount;
-        PlayerPrefs.SetInt("Money", coin);
+        // PlayerPrefs.SetInt("Money", coin);
         UpdateText();
     }
 
     public void DecreaseMoney(int amount)
     {
         coin -= amount;
-        PlayerPrefs.SetInt("Money", coin);
+        // PlayerPrefs.SetInt("Money", coin);
         UpdateText();   
     }
 
@@ -38,7 +38,14 @@ public class CoinManager : MonoBehaviour
         {
             int thousands = coin / 1000;
             int hundreds = (coin % 1000) / 100;
-            coinText.text = $"{thousands}k{hundreds}";
+            if (hundreds == 0)
+            {
+                coinText.text = $"{thousands}k";
+            }
+            else
+            {
+                coinText.text = $"{thousands}k{hundreds}";
+            }
         }
     }
 

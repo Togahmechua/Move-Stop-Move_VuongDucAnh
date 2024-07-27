@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.009403998, y: -0.032348633}
+  m_AnchoredPosition: {x: 0.000013412055, y: -0.032348633}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3763262261549693463
@@ -1841,6 +1841,8 @@ MonoBehaviour:
   pos: {fileID: 4885654752610510866}
   lockButton: {fileID: 6665958025801111103}
   equippedButton: {fileID: 176653098466851559}
+  unEquippedButton: {fileID: 0}
+  XButton: {fileID: 0}
 --- !u!1 &8355025180367131289
 GameObject:
   m_ObjectHideFlags: 0

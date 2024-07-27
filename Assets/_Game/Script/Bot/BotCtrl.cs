@@ -31,7 +31,7 @@ public class BotCtrl : Character
         }
         else
         {
-            GameData.Ins.SetSkin(this, Random.Range(0, System.Enum.GetValues(typeof(ESetSkin)).Length));
+            GameData.Ins.SetSkin(this, Random.Range(1, System.Enum.GetValues(typeof(ESetSkin)).Length));
         }
         int num = Random.Range(0, System.Enum.GetValues(typeof(EWeapon)).Length);
         weaponModel = GameData.Ins.RandomModelWeapon(num, fullSetItem.TfWeaponHolder);
