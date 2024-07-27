@@ -25,6 +25,7 @@ public class Character : GameUnit
     protected float timeToShoot; 
 
     private string animName;
+    public int countToScale;
 
     public virtual void Die()
     {

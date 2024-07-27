@@ -11,7 +11,7 @@ public class Level : MonoBehaviour
 
     public List<Transform> spawnList;
     public BotCtrl botPrefab;
-    public float spawnDelay = 2f; 
+    public float spawnDelay = 4f; 
     public List<BotCtrl> spawnedBots = new List<BotCtrl>(); 
 
     private bool canSpawnMoreBots;
@@ -33,6 +33,11 @@ public class Level : MonoBehaviour
             // Debug.Log("A");
             SetPlayerPosition();
             isSetPos = true;
+        }
+
+        if (spawnedBots.Count >= maxBotCount)
+        {
+            canSpawnMoreBots = false;
         }
     }
 
@@ -65,6 +70,7 @@ public class Level : MonoBehaviour
             if (currentBotCount < maxBotCount)
             {
                 BotCtrl bot = SimplePool.Spawn<BotCtrl>(botPrefab, spawnList[i % spawnList.Count].position, spawnList[i % spawnList.Count].rotation);
+                bot.OnInit();
                 spawnedBots.Add(bot);
                 currentBotCount++;
             }
@@ -77,6 +83,7 @@ public class Level : MonoBehaviour
         {
             int randomIndex = Random.Range(0, spawnList.Count);
             BotCtrl bot = SimplePool.Spawn<BotCtrl>(botPrefab, spawnList[randomIndex].position, spawnList[randomIndex].rotation);
+            bot.OnInit();
             spawnedBots.Add(bot);
             currentBotCount++;
         }
@@ -92,7 +99,14 @@ public class Level : MonoBehaviour
             // Check if all bots have been killed
             if (remainingBotCount <= 0)
             {
-                Debug.Log("Win!");
+                if (player.isded == false)
+                {
+                    LevelManager.Ins.winCanvas.SetActive(true);
+                    LevelManager.Ins.gameplayCanvas.SetActive(false);
+                    LevelManager.Ins.currentLevel++;
+                    LevelManager.Ins.coinMNG.IncreaseMoney(100);
+                    PlayerPrefs.SetInt("CurrentLevel", LevelManager.Ins.currentLevel);
+                }
             }
 
             // Start coroutine to spawn a new bot after a delay

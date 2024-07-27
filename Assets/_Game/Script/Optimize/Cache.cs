@@ -41,4 +41,16 @@ public class Cache
 
         return obstacle[collider];
     }
+
+    private static Dictionary<Collider, BotCtrl> botctrl = new Dictionary<Collider, BotCtrl>();
+
+    public static BotCtrl GetBotCtrl(Collider collider)
+    {
+        if (!botctrl.ContainsKey(collider))
+        {
+            botctrl.Add(collider, collider.GetComponent<BotCtrl>());
+        }
+
+        return botctrl[collider];
+    }
 }

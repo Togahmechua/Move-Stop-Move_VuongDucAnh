@@ -13,6 +13,7 @@ public class BotCtrl : Character
     [SerializeField] private float rangeToMove;
     [SerializeField] private Vector3 _destinationPosition;
 
+    public Target targetScr;
     public IState<BotCtrl> currentState;
     public StartState startState;
     public IdleState idleState;
@@ -55,6 +56,16 @@ public class BotCtrl : Character
         }
     }
 
+    public void OnInit()
+    {
+        isded = false;
+        canShoot = true;
+        currentState = null;
+        agent.enabled = true;
+        agent.speed = moveSpeed;
+        TransitionToState(idleState);
+    }
+
     private void TransToIdleState()
     {
         TransitionToState(idleState);
@@ -63,11 +74,6 @@ public class BotCtrl : Character
     private void Update()
     {
         currentState?.OnExecute(this);
-
-        if (isded)
-        {
-            TransitionToState(dieState);
-        }
     }
 
     public void TransitionToState(IState<BotCtrl> newState)
@@ -96,9 +102,7 @@ public class BotCtrl : Character
     {
         base.Die();
         agent.speed = 0;
-        ChangeAnim(Constants.ANIM_Dead);
         canShoot = false;
-
         Invoke(nameof(DespawnBots), 1f);
     }
 

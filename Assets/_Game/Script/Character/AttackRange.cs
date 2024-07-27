@@ -8,22 +8,26 @@ public class AttackRange : MonoBehaviour
     public bool isInRange;
     public List<Character> characterList;
 
-
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
         if (character != null && character != parent && !characterList.Contains(character))
         {
-            // Debug.Log(other.transform.name,gameObject);
             character.OnCharacterDeath += HandleCharacterDeath;
             characterList.Add(character);
             isInRange = true;
         }
-
+        
         Obstacle obstacle = Cache.GetObstacle(other);
         if (obstacle != null && parent is Player)
         {
             obstacle.Blur();
+        }
+
+        BotCtrl botCtrl = Cache.GetBotCtrl(other);
+        if (botCtrl != null)
+        {
+            botCtrl.targetScr.enabled = false;
         }
     }
 
@@ -32,16 +36,21 @@ public class AttackRange : MonoBehaviour
         Character character = Cache.GetCharacter(other);
         if (character != null && character != parent && characterList.Contains(character))
         {
-            // Debug.Log(other.transform.name,gameObject);
             character.OnCharacterDeath -= HandleCharacterDeath;
             characterList.Remove(character);
-            isInRange = false;
+            isInRange = characterList.Count > 0;
         }
 
         Obstacle obstacle = Cache.GetObstacle(other);
         if (obstacle != null)
         {
             obstacle.DefaultColor();
+        }
+
+        BotCtrl botCtrl = Cache.GetBotCtrl(other);
+        if (botCtrl != null)
+        {
+            botCtrl.targetScr.enabled = true;
         }
     }
 
@@ -50,7 +59,19 @@ public class AttackRange : MonoBehaviour
         if (characterList.Contains(character))
         {
             characterList.Remove(character);
-            isInRange = false;
+            isInRange = characterList.Count > 0;
         }
+    }
+
+    // Method to clean up inactive or despawned characters
+    private void CleanUpCharacterList()
+    {
+        characterList.RemoveAll(character => character == null || !character.gameObject.activeSelf);
+        isInRange = characterList.Count > 0;
+    }
+
+    private void Update()
+    {
+        CleanUpCharacterList();
     }
 }

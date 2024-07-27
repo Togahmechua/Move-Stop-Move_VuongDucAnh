@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataConfigs:
   - ID: 21
-    spriteIcon: {fileID: 21300000, guid: e949e31a829aafb49abe7aa6108ab521, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 830b0bcd38414b242b5f40edc5dab7b8, type: 3}
     Price: 1
     isLock: 1
     isEquip: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
     eskinType: 2
     eBuffType: 0
   - ID: 22
-    spriteIcon: {fileID: 21300000, guid: 25e2e3dc2e24ba549bbbae5479865bbf, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 830b0bcd38414b242b5f40edc5dab7b8, type: 3}
     Price: 2
     isLock: 1
     isEquip: 0

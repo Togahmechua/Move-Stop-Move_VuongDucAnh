@@ -12,16 +12,24 @@ public class UIShopItem : MonoBehaviour
 
     public Button BtnSelect;
     public Image ImgIcon;
+    public Image TouchScreenSpr;
     public GameObject GoLock;
     public GameObject equippedText;
     public int id;
     public bool isEquip { get; private set; }
-    public bool IsBought => isBought; // Expose isBought property
-
+    public bool IsBought => isBought;
     void Start()
     {
         BtnSelect.onClick.AddListener(OnClickSelectItem);
-        player = GameObject.Find("Player").GetComponent<Player>();
+        // player = GameObject.Find("Player").GetComponent<Player>();
+        OnInit();
+    }
+
+    public void OnInit()
+    {
+        TouchScreenSpr.gameObject.SetActive(false);
+        GoLock.SetActive(true);
+        equippedText.SetActive(false);
     }
 
     public void Setup(ShopItemDataConfig shopItemDataConfig) 
@@ -29,71 +37,64 @@ public class UIShopItem : MonoBehaviour
         DataConfig = shopItemDataConfig;
         id = DataConfig.ID;
         ImgIcon.sprite = DataConfig.spriteIcon;
-
-        // Load purchase and equip status
-        isBought = PlayerPrefs.GetInt("ItemBought_" + id, 0) == 1;
-        GoLock.SetActive(!isBought);
-
-        isEquip = PlayerPrefs.GetInt("ItemEquipped_" + id, 0) == 1;
-        equippedText.SetActive(isEquip);
     }
 
     private void OnClickSelectItem()
     {
         if (!isBought)
         {
-            UICShopSkin.Ins.ShowItemInfo(id);
-            EquipItemToPlayer();
+            // UICShopSkin.Ins.ShowItemInfo(id);
+            // EquipItemToPlayer();
         }
         else
         {
-            UICShopSkin.Ins.ShowBoughtItemInfo(id);
-            EquipItemToPlayer();
+            // UICShopSkin.Ins.ShowBoughtItemInfo(id);
+            // EquipItemToPlayer();
         }
     }
 
-    public void SetBought()
-    {
-        isBought = true;
-        GoLock.SetActive(false);
+    // public void SetBought()
+    // {
+    //     isBought = true;
+    //     GoLock.SetActive(false);
         
-        // Save item purchase status
-        PlayerPrefs.SetInt("ItemBought_" + id, 1);
-        PlayerPrefs.Save();
-    }
+    //     // Save item purchase status
+    //     PlayerPrefs.SetInt("ItemBought_" + id, 1);
+    //     PlayerPrefs.Save();
+    // }
 
-    public void SetEquip(bool equip)
-    {
-        isEquip = equip;
-        equippedText.SetActive(equip);
+    // public void SetEquip(bool equip)
+    // {
+    //     isEquip = equip;
+    //     equippedText.SetActive(equip);
         
-        // Save item equip status
-        PlayerPrefs.SetInt("ItemEquipped_" + id, equip ? 1 : 0);
-        PlayerPrefs.Save();
-    }
+    //     // Save item equip status
+    //     PlayerPrefs.SetInt("ItemEquipped_" + id, equip ? 1 : 0);
+    //     PlayerPrefs.Save();
+    // }
 
-    private void EquipItemToPlayer()
-    {
-        switch (DataConfig.eskinType)
-        {
-            case EskinType.Hat:
-                GameData.Ins.SetHatForPlayer(id, player.fullSetItem.hatPos);
-                break;
-            case EskinType.Pant:
-                GameData.Ins.SetPantForPlayer(id - 10, player.fullSetItem.PantRenderer);
-                break;
-            case EskinType.Shield:
-                GameData.Ins.SetShieldForPlayer(id - 20, player.fullSetItem.shieldPos);
-                break;
-            case EskinType.SkinSet:
-                player.PlayerSetSkin(id - 30);
-                break;
-        }
+    // private void EquipItemToPlayer()
+    // {
+    //     switch (DataConfig.eskinType)
+    //     {
+    //         case EskinType.Hat:
+    //             GameData.Ins.SetHatForPlayer(id, player.fullSetItem.hatPos);
+    //             break;
+    //         case EskinType.Pant:
+    //             GameData.Ins.SetPantForPlayer(id - 10, player.fullSetItem.PantRenderer);
+    //             break;
+    //         case EskinType.Shield:
+    //             GameData.Ins.SetShieldForPlayer(id - 20, player.fullSetItem.shieldPos);
+    //             break;
+    //         case EskinType.SkinSet:
+    //             player.PlayerSetSkin(id - 30);
+    //             break;
+    //     }
         
-        // Save the current skin
-        PlayerPrefs.SetInt("PlayerSkin", id);
-        PlayerPrefs.Save();
-    }
+    //     // Save the current skin
+    //     PlayerPrefs.SetInt("PlayerSkin", id);
+    //     PlayerPrefs.Save();
+    // }
 
     private void BuffForPlayer()
     {

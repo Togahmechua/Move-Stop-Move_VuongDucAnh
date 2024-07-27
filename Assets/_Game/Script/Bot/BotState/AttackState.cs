@@ -7,6 +7,11 @@ public class AttackState : IState<BotCtrl>
     private bool isCheck;
     public void OnEnter(BotCtrl bot)
     {
+        if (bot.isded == true)
+        {
+            bot.TransitionToState(bot.dieState);
+        }
+        
         isCheck = false;
         if (bot.attackRange.characterList.Count != 0)
         {

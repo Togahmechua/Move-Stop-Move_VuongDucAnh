@@ -10,6 +10,10 @@ public class MoveState : IState<BotCtrl>
 
     public void OnEnter(BotCtrl bot)
     {
+        if (bot.isded == true)
+        {
+            bot.TransitionToState(bot.dieState);
+        }
         // Debug.Log("Is moving");
         bot.ChangeAnim(Constants.ANIM_RUNNING);
         bot.MoveToNewPos();

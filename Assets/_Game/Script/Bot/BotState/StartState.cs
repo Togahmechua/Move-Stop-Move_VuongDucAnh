@@ -6,7 +6,7 @@ public class StartState : IState<BotCtrl>
 {
     public void OnEnter(BotCtrl bot)
     {
-        
+
     }
 
     public void OnExecute(BotCtrl bot)

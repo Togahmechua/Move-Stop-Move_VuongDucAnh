@@ -22,7 +22,7 @@ public class Weapon : GameUnit
 
     public virtual void OnFire(Transform pos, Character owner)
     {
-    //    Debug.Log("IsShooting");
+        // Implement shooting logic here
     }
 
     public void SetOwner(Character owner)
@@ -60,7 +60,11 @@ public class Weapon : GameUnit
             if (Owner != null)
             {
                 Owner.canShoot = true;
-                Owner.BuffScale();
+                Owner.countToScale++;
+                if (Owner.countToScale % 3 == 0)
+                {
+                    Owner.BuffScale();
+                }
             }
             SimplePool.Despawn(this);
             character.isded = true;
@@ -69,6 +73,5 @@ public class Weapon : GameUnit
         {
             character.isded = true;
         }
-
     }
 }

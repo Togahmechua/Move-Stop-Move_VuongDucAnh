@@ -1,4 +1,4 @@
-        using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,11 +14,13 @@ public class LevelManager : MonoBehaviour
     public Button starButton;
     public bool isStart;
     public int currentLevel;
-    public GameObject loseCanvas;
+    public LoseCanvas loseCanvas;
     public GameObject gameplayCanvas;
+    public GameObject winCanvas;
+    public Level currentLevelInstance;
+    public CoinManager coinMNG;
 
     [SerializeField] private List<Level> levelList = new List<Level>();
-    public Level currentLevelInstance;
 
     private void Awake()
     {
@@ -29,6 +31,14 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         StartLevel(currentLevel);
+    }
+
+    private void Update()
+    {
+        if (currentLevel > levelList.Count - 1)
+        {
+            currentLevel = levelList.Count - 1;
+        }
     }
 
     public void StartGame()
@@ -50,6 +60,14 @@ public class LevelManager : MonoBehaviour
 
     public void StartLevel(int levelIndex)
     {
+        if (levelList.Count == 0)
+        {
+            Debug.LogError("No levels in the level list.");
+            return;
+        }
+
+        levelIndex = Mathf.Clamp(levelIndex, 0, levelList.Count - 1);
+
         if (currentLevelInstance != null)
         {
             foreach (var bot in currentLevelInstance.spawnedBots)

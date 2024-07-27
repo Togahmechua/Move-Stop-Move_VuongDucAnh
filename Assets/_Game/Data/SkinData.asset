@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataConfigs:
   - ID: 31
-    spriteIcon: {fileID: 21300000, guid: 81d14de217cff1e46b165cbe20862a92, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 591bf6bd34c3a3c4e9143ba55a6c7d7b, type: 3}
     Price: 1
     isLock: 1
     isEquip: 0
@@ -22,7 +22,7 @@ MonoBehaviour:
     eskinType: 3
     eBuffType: 0
   - ID: 32
-    spriteIcon: {fileID: 21300000, guid: 187e596a496fbc5429b8239cfa80b9f6, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 9f8e6f5ea0f849447b464193072ab6f3, type: 3}
     Price: 2
     isLock: 1
     isEquip: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     eskinType: 3
     eBuffType: 0
   - ID: 33
-    spriteIcon: {fileID: 21300000, guid: d2ef6a62b15b6ea438383fd533d7d055, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 916eb971e2dc28b419a242fa6950df78, type: 3}
     Price: 3
     isLock: 0
     isEquip: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
     eskinType: 3
     eBuffType: 0
   - ID: 34
-    spriteIcon: {fileID: 597243688, guid: 2cbb91af7d6b67a41981d02e35a30d2b, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 7965f490c2ec6044d854d957fe85186e, type: 3}
     Price: 4
     isLock: 0
     isEquip: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
     eskinType: 3
     eBuffType: 0
   - ID: 35
-    spriteIcon: {fileID: 1897422241, guid: 2b097325031cb2d479ada5f9fe3c46b8, type: 3}
+    spriteIcon: {fileID: 21300000, guid: 0363a7557b133774f99bf84dcf6fcbed, type: 3}
     Price: 5
     isLock: 0
     isEquip: 0

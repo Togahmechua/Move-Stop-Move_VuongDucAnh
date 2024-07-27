@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class DieState : IState<BotCtrl>
 {
-    private bool isded = false;
     public void OnEnter(BotCtrl bot)
     {
-        if (isded == true) return;
-        // Debug.Log("Trans to die state");
+        bot.ChangeAnim(Constants.ANIM_Dead);
         bot.Die();
-        isded = true;
     }
 
     public void OnExecute(BotCtrl bot)

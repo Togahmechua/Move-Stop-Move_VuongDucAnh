@@ -169,17 +169,14 @@ public class Player : Character
     public IEnumerator Ded()
     {
         ChangeAnim(Constants.ANIM_Dead);
-        LevelManager.Ins.loseCanvas.SetActive(true);
+        LevelManager.Ins.loseCanvas.gameObject.SetActive(true);
+        LevelManager.Ins.loseCanvas.UpdateText();
         LevelManager.Ins.DespawnAllBot();
-        joyStick.HandleRange = 0;
-        RectTransform handleRect = joyStick.transform.GetChild(0).GetComponent<RectTransform>();
-        if (handleRect != null)
-        {
-            handleRect.anchoredPosition = Vector2.zero;
-        }
+        joyStick.OnPointerUp(null);
 
         yield return new WaitForSeconds(0.2f);
         LevelManager.Ins.gameplayCanvas.SetActive(false);
+        joyStick.OnPointerUp(null);
     }
 
     public void ChangeWeapon(int num)
