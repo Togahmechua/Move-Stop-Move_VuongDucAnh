@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5c3d05577b95646b83b8c9d62ceebc, type: 3}
+  m_Name: HairDataConfig
+  m_EditorClassIdentifier: 
+  dataConfigs:
+  - ID: 0
+    spriteIcon: {fileID: 21300000, guid: ba7eaabcc72662b44986102586a83d1b, type: 3}
+    Price: 500
+    isLock: 0
+    isEquip: 1
+    isBought: 1
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 1
+    spriteIcon: {fileID: 21300000, guid: b077210d30e369147abccc3ed75b6bc0, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 2
+    spriteIcon: {fileID: 21300000, guid: 75e1caf98a393624a810445b8ae85902, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 3
+    spriteIcon: {fileID: 21300000, guid: 80620b95513a84347affb760bc45f46e, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 4
+    spriteIcon: {fileID: 21300000, guid: d4c3a2125014f6044942764930bad415, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 5
+    spriteIcon: {fileID: 21300000, guid: 272199ec36d8f174eb997ad25166c786, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 6
+    spriteIcon: {fileID: 21300000, guid: e7c34ada89c19a240be42d096d4c80e0, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 7
+    spriteIcon: {fileID: 21300000, guid: b6262b96f586ef44b9d39d3f062b8358, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 8
+    spriteIcon: {fileID: 21300000, guid: 4206c79f4f0e7fc4d9c9805aa1de030b, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
+  - ID: 9
+    spriteIcon: {fileID: 21300000, guid: a56bccceb18534a4993d4fdde97df696, type: 3}
+    Price: 500
+    isLock: 1
+    isEquip: 0
+    isBought: 0
+    isUnequip: 0
+    eskinType: 0
+    eBuffType: 1
