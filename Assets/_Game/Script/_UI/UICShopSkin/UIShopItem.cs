@@ -19,6 +19,8 @@ public class UIShopItem : MonoBehaviour
 
     private static UIShopItem currentlySelectedItem;
     private List<int> intList = new List<int>(); // List to keep track of equipped item IDs
+    private static EBuffType currentBuffType = EBuffType.None;
+    private static float currentBuffValue = 0f;
 
     void Start()
     {
@@ -114,6 +116,10 @@ public class UIShopItem : MonoBehaviour
         {
             intList.Add(id); // Track the currently equipped item ID
 
+            // Remove previous buff if applicable
+            RemoveCurrentBuff();
+
+            // Equip the item and apply its buff
             switch (DataConfig.eskinType)
             {
                 case EskinType.Hat:
@@ -129,24 +135,52 @@ public class UIShopItem : MonoBehaviour
                     player.PlayerSetSkin(id - 30);
                     break;
             }
+
+            // Apply the new buff
+            currentBuffType = DataConfig.eBuffType;
+            currentBuffValue = DataConfig.value;
+            ApplyBuff(currentBuffType, currentBuffValue);
         }
     }
 
-    public void EquipBuff()
+    private void ApplyBuff(EBuffType buffType, float amount)
     {
-        switch (DataConfig.eBuffType)
+        switch (buffType)
         {
             case EBuffType.AttackRange:
-                // Implement buff logic
+                Debug.Log("Range Buff: " + amount);
+                player.attackRange.AttackRangeBuff(amount);
                 break;
             case EBuffType.MoveSpeed:
-                // Implement buff logic
+                Debug.Log("Speed Buff: " + amount);
+                player.moveSpeed += amount;
                 break;
             case EBuffType.Gold:
-                // Implement buff logic
+                Debug.Log("Gold Buff: " + amount);
+                LevelManager.Ins.coinMNG.coinBuff = (int)amount;
                 break;
-            default: 
+            default:
                 break;
         }
+    }
+
+    private void RemoveCurrentBuff()
+    {
+        switch (currentBuffType)
+        {
+            case EBuffType.AttackRange:
+                player.attackRange.AttackRangeBuff(-currentBuffValue);
+                break;
+            case EBuffType.MoveSpeed:
+                player.moveSpeed -= currentBuffValue;
+                break;
+            case EBuffType.Gold:
+                // Assuming gold buff doesn't need removal
+                break;
+            default:
+                break;
+        }
+        currentBuffType = EBuffType.None;
+        currentBuffValue = 0f;
     }
 }

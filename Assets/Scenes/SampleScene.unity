@@ -4113,6 +4113,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1213818029}
+        m_TargetAssemblyTypeName: UICShopSkin, Assembly-CSharp
+        m_MethodName: ExitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &482208213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6398,6 +6410,7 @@ MonoBehaviour:
   parent: {fileID: 2030380043}
   isInRange: 0
   characterList: []
+  colliderRad: {fileID: 817257166}
 --- !u!1 &823373682
 GameObject:
   m_ObjectHideFlags: 0
@@ -7051,6 +7064,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1562211727}
+        m_TargetAssemblyTypeName: UICShopSkin, Assembly-CSharp
+        m_MethodName: ExitButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11718,6 +11743,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinText: {fileID: 344226052}
   coin: 1000
+  coinBuff: 0
 --- !u!1 &1557274865
 GameObject:
   m_ObjectHideFlags: 0
@@ -15369,6 +15395,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 65249630}
+        m_TargetAssemblyTypeName: UICShopSkin, Assembly-CSharp
+        m_MethodName: ExitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1977863793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16083,7 +16121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -42.56073, y: 6.702301}
+  m_AnchoredPosition: {x: -42.56079, y: 6.702301}
   m_SizeDelta: {x: -136.9786, y: -30.6786}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073009835
@@ -16767,6 +16805,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7535928209038335548}
+        m_TargetAssemblyTypeName: UICShopSkin, Assembly-CSharp
+        m_MethodName: ExitButton
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

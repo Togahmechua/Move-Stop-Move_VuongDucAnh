@@ -20,6 +20,7 @@ public class ShopItemDataConfig {
     public bool isUnequip;
     public EskinType eskinType;
     public EBuffType eBuffType;
+    public float value;
 }
 
 public enum EskinType

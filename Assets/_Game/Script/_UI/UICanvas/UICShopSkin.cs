@@ -185,7 +185,7 @@ public class UICShopSkin : UICanvas
     public void ExitButton()
     {
         Debug.Log("ExitButton called");
-        bool itemFound = false; // Flag to determine if an item is found
+        bool itemFound = false;
 
         foreach (int itemId in intList)
         {
@@ -193,7 +193,7 @@ public class UICShopSkin : UICanvas
 
             if (itemConfig != null && itemConfig.isBought && itemConfig.isEquip)
             {
-                Debug.Log("A"); // Log "A" if item with isBought and isEquip is found
+                Debug.Log("A");
                 itemFound = true;
                 break;
             }
@@ -201,14 +201,66 @@ public class UICShopSkin : UICanvas
 
         if (!itemFound)
         {
-            // No item with isBought and isEquip found, set player to default skin
-            Debug.Log("No equipped and bought item found; setting player to default skin.");
-            player.PlayerSetSkin(0);
-        }
+            Debug.Log("No equipped and bought item found; unequipping items based on their ID ranges.");
 
+            foreach (int itemId in intList)
+            {
+                ShopItemDataConfig itemConfig = shopItemDataSO.dataConfigs.Find(item => item.ID == itemId);
+                if (itemConfig != null && !itemConfig.isEquip)
+                {
+                    UnequipItemById(itemId);
+                }
+            }
+
+            // Set player to default skin after unequipping items
+            player.PlayerSetSkin(0);
+            player.ResetBuffs();
+        }
+        
+        SaveEquippedItems();
         // Clear the list and update all items
         intList.Clear();
         UpdateAllItemsState();
+    }
+
+    private void UnequipItemById(int itemId)
+    {
+        ShopItemDataConfig itemConfig = shopItemDataSO.dataConfigs.Find(item => item.ID == itemId);
+        if (itemConfig != null)
+        {
+            switch (itemId)
+            {
+                case int n when (n >= 0 && n < 10):
+                    GameData.Ins.SetHatForPlayer(10, player.fullSetItem.hatPos);
+                    break;
+                case int n when (n >= 10 && n < 20):
+                    GameData.Ins.SetPantForPlayer(10, player.fullSetItem.PantRenderer);
+                    break;
+                case int n when (n >= 20 && n < 30):
+                    GameData.Ins.SetShieldForPlayer(0, player.fullSetItem.shieldPos);
+                    break;
+                case int n when (n >= 30 && n < 40):
+                    player.PlayerSetSkin(0);
+                    break;
+            }
+        }
+    }
+
+    public void SaveEquippedItems()
+    {
+        List<int> equippedItemIds = new List<int>();
+
+        foreach (var itemConfig in shopItemDataSO.dataConfigs)
+        {
+            if (itemConfig.isBought && itemConfig.isEquip)
+            {
+                equippedItemIds.Add(itemConfig.ID);
+            }
+        }
+
+        string equippedItems = string.Join(",", equippedItemIds);
+        PlayerPrefs.SetString("EquippedItems", equippedItems);
+        PlayerPrefs.Save();
     }
 
     private UIShopItem FindUIShopItemById(int id)

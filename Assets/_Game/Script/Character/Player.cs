@@ -7,7 +7,8 @@ public class Player : Character
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private FixedJoystick joyStick;
-    [SerializeField] private float moveSpeed;
+
+    public float moveSpeed = 8f;
     private GameObject targetBot;
     public bool isDancing;
     public int currentNum;
@@ -18,9 +19,8 @@ public class Player : Character
         currentNum = PlayerPrefs.GetInt("PWeapon", 0);
         EquipWeapon(currentNum);
 
-        // Load skin data and set the current skin
-        int skinId = PlayerPrefs.GetInt("PlayerSkin", 0);
-        EquipPreviouslyEquippedItem(skinId);
+        // Load equipped items
+        LoadEquippedItems();
     }
 
     public void OnInit()
@@ -32,6 +32,13 @@ public class Player : Character
         timeToShoot = 0f;
 
         attackRange.characterList.Clear();
+    }
+
+    public void ResetBuffs()
+    {
+        attackRange.colliderRad.radius = 0.5f;
+        LevelManager.Ins.coinMNG.coinBuff = 0;
+        moveSpeed = 8f;
     }
 
     private void EquipWeapon(int weaponId)
@@ -66,7 +73,7 @@ public class Player : Character
 
     public void EquipPreviouslyEquippedItem(int id)
     {
-        if (id > 0 && id < 10)
+        if (id >= 0 && id < 10)
         {
             PlayerSetHat(id);
         }
@@ -191,5 +198,21 @@ public class Player : Character
         isded = false;
         gameObject.SetActive(true);
         OnInit();
+    }
+
+    private void LoadEquippedItems()
+    {
+        string equippedItemsString = PlayerPrefs.GetString("EquippedItems", "");
+        if (!string.IsNullOrEmpty(equippedItemsString))
+        {
+            string[] equippedItemIds = equippedItemsString.Split(',');
+            foreach (string itemId in equippedItemIds)
+            {
+                if (int.TryParse(itemId, out int id))
+                {
+                    EquipPreviouslyEquippedItem(id);    
+                }
+            }
+        }
     }
 }

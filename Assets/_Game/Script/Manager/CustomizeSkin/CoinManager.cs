@@ -7,16 +7,19 @@ public class CoinManager : MonoBehaviour
 {
     public TextMeshProUGUI coinText;
     public int coin;
+    public int coinBuff;
 
     private void Start()
     {
         // coin = PlayerPrefs.GetInt("Money", 0);
         UpdateText();
+        coinBuff = 0;
     }
 
     public void IncreaseMoney(int amount)
     {
-        coin += amount;
+        int money = amount + coinBuff;
+        coin += money;
         // PlayerPrefs.SetInt("Money", coin);
         UpdateText();
     }

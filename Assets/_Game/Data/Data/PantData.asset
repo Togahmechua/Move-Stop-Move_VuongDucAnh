@@ -22,6 +22,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 11
     spriteIcon: {fileID: 1923250579, guid: 3187ea78b1613ca419e8095f46f5f25e, type: 3}
     Price: 500
@@ -31,6 +32,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 12
     spriteIcon: {fileID: 261072589, guid: 2b097325031cb2d479ada5f9fe3c46b8, type: 3}
     Price: 500
@@ -40,6 +42,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 13
     spriteIcon: {fileID: 597243688, guid: 2cbb91af7d6b67a41981d02e35a30d2b, type: 3}
     Price: 500
@@ -49,6 +52,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 14
     spriteIcon: {fileID: -1006376257, guid: fa6f6876198759b49a3daf9c8ae602f4, type: 3}
     Price: 500
@@ -58,6 +62,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 15
     spriteIcon: {fileID: 1895235833, guid: 4379635a22a86e84d97e1a955bef48e3, type: 3}
     Price: 500
@@ -67,6 +72,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 16
     spriteIcon: {fileID: -424514542, guid: 8df4eee575bd09846b8c3c3706c2cd98, type: 3}
     Price: 500
@@ -76,6 +82,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 17
     spriteIcon: {fileID: 1907759786, guid: 3e6c96addd370564da6b1ff40da91e39, type: 3}
     Price: 500
@@ -85,6 +92,7 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1
   - ID: 18
     spriteIcon: {fileID: 1840894354, guid: b4c94ccdb7b1b0f459375e7984db3839, type: 3}
     Price: 500
@@ -94,3 +102,4 @@ MonoBehaviour:
     isUnequip: 0
     eskinType: 1
     eBuffType: 2
+    value: 1

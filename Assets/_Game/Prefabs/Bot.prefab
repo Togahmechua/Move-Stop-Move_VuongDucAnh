@@ -784,6 +784,7 @@ MonoBehaviour:
   parent: {fileID: 5817842040147711665}
   isInRange: 0
   characterList: []
+  colliderRad: {fileID: 159696626681421889}
 --- !u!1 &2364173743098226310
 GameObject:
   m_ObjectHideFlags: 0

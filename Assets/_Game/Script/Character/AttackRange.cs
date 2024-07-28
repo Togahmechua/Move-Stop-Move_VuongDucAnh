@@ -7,6 +7,12 @@ public class AttackRange : MonoBehaviour
     [SerializeField] private Character parent;  
     public bool isInRange;
     public List<Character> characterList;
+    public SphereCollider colliderRad;
+
+    public void AttackRangeBuff(float amount)
+    {
+        colliderRad.radius += amount;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
