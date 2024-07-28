@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private FixedJoystick joyStick;
+    [SerializeField] private FloatingJoystick joyStick;
 
     public float moveSpeed = 8f;
     private GameObject targetBot;

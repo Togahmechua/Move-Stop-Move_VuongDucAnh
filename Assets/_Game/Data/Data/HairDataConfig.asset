@@ -16,10 +16,10 @@ MonoBehaviour:
   - ID: 0
     spriteIcon: {fileID: 21300000, guid: ba7eaabcc72662b44986102586a83d1b, type: 3}
     Price: 500
-    isLock: 0
+    isLock: 1
     isEquip: 0
-    isBought: 1
-    isUnequip: 1
+    isBought: 0
+    isUnequip: 0
     eskinType: 0
     eBuffType: 1
     value: 0.2

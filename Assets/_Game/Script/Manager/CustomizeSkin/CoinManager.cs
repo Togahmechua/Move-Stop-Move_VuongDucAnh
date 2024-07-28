@@ -11,7 +11,7 @@ public class CoinManager : MonoBehaviour
 
     private void Start()
     {
-        // coin = PlayerPrefs.GetInt("Money", 0);
+        coin = PlayerPrefs.GetInt("Money", 0);
         UpdateText();
         coinBuff = 0;
     }
@@ -20,14 +20,14 @@ public class CoinManager : MonoBehaviour
     {
         int money = amount + coinBuff;
         coin += money;
-        // PlayerPrefs.SetInt("Money", coin);
+        PlayerPrefs.SetInt("Money", coin);
         UpdateText();
     }
 
     public void DecreaseMoney(int amount)
     {
         coin -= amount;
-        // PlayerPrefs.SetInt("Money", coin);
+        PlayerPrefs.SetInt("Money", coin);
         UpdateText();   
     }
 
