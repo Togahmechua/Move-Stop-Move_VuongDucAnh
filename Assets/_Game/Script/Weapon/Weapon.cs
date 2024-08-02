@@ -55,7 +55,7 @@ public class Weapon : GameUnit
     private void OnTriggerEnter(Collider other)
     {
         Character character = Cache.GetCharacter(other);
-        if (character != null && character != Owner && character is not Player)
+        if (character != null && character != Owner)
         {
             if (Owner != null)
             {
@@ -66,12 +66,19 @@ public class Weapon : GameUnit
                     Owner.BuffScale();
                 }
             }
+
             SimplePool.Despawn(this);
-            character.isded = true;
-        }
-        else if (character != null && character != Owner && character is Player)
-        {
-            character.isded = true;
+
+            if (character is Player)
+            {
+                character.isded = true;
+            }
+            else
+            {
+                // Call Die() method to ensure proper handling of character's death
+                character.Die();
+                Debug.Log("Die");
+            }
         }
     }
 }

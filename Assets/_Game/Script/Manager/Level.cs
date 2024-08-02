@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,8 +11,8 @@ public class Level : MonoBehaviour
 
     public List<Transform> spawnList;
     public BotCtrl botPrefab;
-    public float spawnDelay = 4f; 
-    public List<BotCtrl> spawnedBots = new List<BotCtrl>(); 
+    public float spawnDelay = 4f;
+    public List<BotCtrl> spawnedBots = new List<BotCtrl>();
 
     private bool canSpawnMoreBots;
     public bool isSetPos;
@@ -30,7 +30,6 @@ public class Level : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, playerPos.position) >= 0.1f && isSetPos == false)
         {
-            // Debug.Log("A");
             SetPlayerPosition();
             isSetPos = true;
         }
@@ -95,11 +94,12 @@ public class Level : MonoBehaviour
         {
             remainingBotCount--;
             currentBotCount--;
+            Debug.Log("Remaining bot count: " + remainingBotCount + ", Current bot count: " + currentBotCount);
 
             // Check if all bots have been killed
             if (remainingBotCount <= 0)
             {
-                if (player.isded == false)
+                if (!player.isded)
                 {
                     LevelManager.Ins.winCanvas.SetActive(true);
                     LevelManager.Ins.gameplayCanvas.SetActive(false);

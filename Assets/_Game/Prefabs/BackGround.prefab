@@ -240,7 +240,7 @@ MonoBehaviour:
   - {fileID: 7124292605684460615}
   - {fileID: 5286171737595407816}
   botPrefab: {fileID: 5817842040147711665, guid: 02e9bca0e8bde9d4fb6a91fee2d0b22e, type: 3}
-  spawnDelay: 2
+  spawnDelay: 4
   spawnedBots: []
   isSetPos: 0
   player: {fileID: 0}

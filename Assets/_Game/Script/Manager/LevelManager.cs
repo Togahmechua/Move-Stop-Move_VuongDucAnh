@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -70,8 +70,10 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevelInstance != null)
         {
-            foreach (var bot in currentLevelInstance.spawnedBots)
+            while (currentLevelInstance.spawnedBots.Count > 0)
             {
+                BotCtrl bot = currentLevelInstance.spawnedBots[0];
+                currentLevelInstance.spawnedBots.RemoveAt(0);
                 SimplePool.Despawn(bot);
             }
             currentLevelInstance.spawnedBots.Clear();
@@ -97,6 +99,7 @@ public class LevelManager : MonoBehaviour
         if (currentLevelInstance != null)
         {
             currentLevelInstance.DecreaseBotCount();
+            Debug.Log("Bot count decreased: " + currentLevelInstance.GetRemainingBotCount());
             UpdateText();
         }
     }

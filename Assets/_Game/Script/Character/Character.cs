@@ -20,15 +20,19 @@ public class Character : GameUnit
     public Transform model;
 
     protected bool isChecked;
-    protected bool isAttacking; // Biến trạng thái cho animation tấn công
+    protected bool isAttacking;
     protected float cooldown = 0.4f;
-    protected float timeToShoot; 
+    protected float timeToShoot;
 
     private string animName;
     public int countToScale;
 
     public virtual void Die()
     {
+        if (isded) return; // Ensure this method is only called once
+        isded = true;
+
+        Debug.Log("Character died, invoking death handler and decreasing bot count.");
         OnCharacterDeath?.Invoke(this);
         LevelManager.Ins.DecreaseBotCount();
     }
@@ -71,8 +75,8 @@ public class Character : GameUnit
         wp.OnFire(shootPos, this);
         yield return new WaitForSeconds(shootDelay);
         ChangeAnim(Constants.ANIM_IDLE);
-        isAttacking = false; // Đặt lại trạng thái tấn công
+        isAttacking = false; // Reset attacking state
         weaponModel.SetActive(true);
-        isChecked = false; //Check điều kiện để bắn
+        isChecked = false; // Check conditions to shoot again
     }
 }

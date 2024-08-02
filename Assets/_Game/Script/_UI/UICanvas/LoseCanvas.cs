@@ -10,7 +10,7 @@ public class LoseCanvas : MonoBehaviour
 
     private void Start()
     {
-        point = LevelManager.Ins.currentLevelInstance.GetRemainingBotCount() + 1;
+        point = LevelManager.Ins.currentLevelInstance.remainingBotCount + 1;
     }
 
     public void UpdateText()
